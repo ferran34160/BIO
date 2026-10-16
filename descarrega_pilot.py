@@ -150,6 +150,7 @@ def imatge(carta, ua):
     wd = get_json("https://www.wikidata.org/w/api.php?" + urllib.parse.urlencode(
         {"action": "wbgetentities", "sites": "enwiki", "titles": titol, "props": "claims",
          "format": "json"}), ua)
+    categories = []
     for ent in wd.get("entities", {}).values():
         for claim in ent.get("claims", {}).get("P18", []):
             nom = claim.get("mainsnak", {}).get("datavalue", {}).get("value")
@@ -157,6 +158,27 @@ def imatge(carta, ua):
                 r = fitxer_commons(nom, ua)
                 if r:
                     return r
+        categories += [c.get("mainsnak", {}).get("datavalue", {}).get("value")
+                       for c in ent.get("claims", {}).get("P373", [])]  # categoria de Commons de l'entitat
+    if carta["categoria"] == "cientific":  # per a persones, la categoria de Commons només té fotos d'ells
+        return imatge_categoria([c for c in categories if c] or [titol], carta["nom"], ua)
+    return {}
+
+def imatge_categoria(categories, nom_persona, ua):
+    cognom = nom_persona.split()[-1].lower()
+    for cat in categories:
+        m = get_json("https://commons.wikimedia.org/w/api.php?" + urllib.parse.urlencode(
+            {"action": "query", "list": "categorymembers", "cmtitle": "Category:" + cat, "cmtype": "file",
+             "cmlimit": 50, "format": "json"}), ua)
+        fitxers = [x["title"][5:] for x in m["query"]["categorymembers"]
+                   if x["title"].lower().endswith((".jpg", ".jpeg", ".png"))]
+        # primer els que porten el cognom al nom del fitxer (retrats), després la resta
+        fitxers.sort(key=lambda f: cognom not in f.lower())
+        for f in fitxers[:8]:
+            r = fitxer_commons(f, ua)
+            if r:
+                print(f"    imatge de la categoria de Commons «{cat}»: {f}  (revisar que sigui la persona correcta)")
+                return r
     return {}
 
 def main():
