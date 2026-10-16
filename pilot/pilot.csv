@@ -5,9 +5,9 @@ gen,KRAS,uniprot,P01116,"cancer,oncogens",3500,articles_pubmed,"{""cromosoma"":"
 gen,EGFR,uniprot,P00533,"cancer,oncogens",5000,articles_pubmed,"{""cromosoma"":""7"",""longitud_aa"":1210}"
 gen,MYC,uniprot,P01106,"cancer,oncogens",4500,articles_pubmed,"{""cromosoma"":""8"",""longitud_aa"":439}"
 tecnica,PCR,mesh,,,3000,articles_pubmed,
-tecnica,Citometria de flux,mesh,,,800,articles_pubmed,
-aparell,Termociclador,wikidata,,,12,llengues_wikipedia,
-aparell,Microscopi,wikidata,,,120,llengues_wikipedia,
+tecnica,Flow cytometry,mesh,,,800,articles_pubmed,
+aparell,Thermal cycler,wikidata,,,12,llengues_wikipedia,
+aparell,Microscope,wikidata,,,120,llengues_wikipedia,
 cientific,Henrietta Lacks,wikidata,,"cancer,linies",60,llengues_wikipedia,
 linia_cellular,HeLa,cellosaurus,,"cancer,linies",100000,articles_pubmed,
 reactiu,DMSO,wikidata,,,150,llengues_wikipedia,

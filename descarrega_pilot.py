@@ -11,9 +11,9 @@ from pathlib import Path
 
 DB = Path(__file__).parent / "db" / "cartes.sqlite"
 # Correspondències que no es poden deduir del nom (revisar-les si una carta surt buida o equivocada)
-MESH_LABEL = {"PCR": "Polymerase Chain Reaction", "Citometria de flux": "Flow Cytometry"}
-WIKI_TITLE = {"PCR": "Polymerase chain reaction", "Citometria de flux": "Flow cytometry",
-              "Termociclador": "Thermal cycler", "Microscopi": "Microscope", "HeLa": "HeLa",
+MESH_LABEL = {"PCR": "Polymerase Chain Reaction", "Flow cytometry": "Flow Cytometry"}
+WIKI_TITLE = {"PCR": "Polymerase chain reaction", "Flow cytometry": "Flow cytometry",
+              "Thermal cycler": "Thermal cycler", "Microscope": "Microscope", "HeLa": "HeLa",
               "DMSO": "Dimethyl sulfoxide", "Henrietta Lacks": "Henrietta Lacks"}
 LLICENCIES_LLIURES = re.compile(r"^(CC[ -]BY|CC0|Public domain|PD)", re.I)
 
