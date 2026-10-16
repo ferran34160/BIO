@@ -4,17 +4,16 @@ Només biblioteca estàndard. Ús:  python descarrega_pilot.py --contacte correu
   UniProt  -> definició (comentari FUNCTION), longitud de la proteïna  (cartes categoria 'gen')
   MeSH     -> definició (scope note) per a cartes amb font 'mesh'
   Wikipedia/Commons -> imatge amb autor i llicència (només llicències lliures)
+  PubMed / Wikipedia -> popularitat (articles a PubMed, o nombre de llengües de la Viquipèdia per a científics)
+Al final recalcula la raresa. Es pot tornar a executar: no refà el que ja està omplert.
 Les cartes queden amb verificada=0: cal revisar-les abans de donar-les per bones.
 """
-import argparse, html, json, re, sqlite3, time, urllib.error, urllib.parse, urllib.request
+import argparse, sys, html, json, re, sqlite3, time, urllib.error, urllib.parse, urllib.request
 from pathlib import Path
 
 DB = Path(__file__).parent / "db" / "cartes.sqlite"
-# Correspondències que no es poden deduir del nom (revisar-les si una carta surt buida o equivocada)
-MESH_LABEL = {"PCR": "Polymerase Chain Reaction", "Flow cytometry": "Flow Cytometry"}
-WIKI_TITLE = {"PCR": "Polymerase chain reaction", "Flow cytometry": "Flow cytometry",
-              "Thermal cycler": "Thermal cycler", "Microscope": "Microscope", "HeLa": "HeLa",
-              "DMSO": "Dimethyl sulfoxide", "Henrietta Lacks": "Henrietta Lacks"}
+sys.path.insert(0, str(Path(__file__).parent))
+from init_db import assigna_raresa
 LLICENCIES_LLIURES = re.compile(r"^(CC[ -]BY|CC0|Public domain|PD)", re.I)
 
 def get_json(url, ua, pausa=1.0):
@@ -34,6 +33,9 @@ def get_json(url, ua, pausa=1.0):
 
 def uniprot(carta, ua):
     d = get_json(f"https://rest.uniprot.org/uniprotkb/{carta['font_id']}.json", ua)
+    gens = [g["geneName"]["value"] for g in d.get("genes", []) if "geneName" in g]
+    if carta["nom"] not in gens:
+        print(f"    ! ATENCIÓ: {carta['font_id']} és el gen {gens}, no {carta['nom']}: revisar l'accessió al CSV")
     funcio = next((c["texts"][0]["value"] for c in d.get("comments", [])
                    if c.get("commentType") == "FUNCTION" and c.get("texts")), None)
     estad = json.loads(carta["estadistiques"] or "{}")
@@ -42,7 +44,7 @@ def uniprot(carta, ua):
             "estadistiques": json.dumps(estad)}
 
 def mesh(carta, ua):
-    label = MESH_LABEL.get(carta["nom"], carta["nom"])
+    label = carta["etiqueta_font"] or carta["nom"]
     trobats = get_json("https://id.nlm.nih.gov/mesh/lookup/descriptor?" + urllib.parse.urlencode(
         {"label": label, "match": "exact", "limit": 1}), ua)
     if not trobats:
@@ -57,10 +59,22 @@ def mesh(carta, ua):
         print(f"    MeSH: {uri} no té scope note")
         return {}
     return {"font_id": uri.rsplit("/", 1)[-1], "definicio": b[0]["note"]["value"],
-            "definicio_font": f"MeSH (NLM), descriptor "{label}""}
+            "definicio_font": f"MeSH (NLM), descriptor '{label}'"}
+
+def popularitat(carta, ua):
+    if carta["popularitat_tipus"] == "wiki_langs":
+        w = get_json("https://en.wikipedia.org/w/api.php?" + urllib.parse.urlencode(
+            {"action": "query", "prop": "langlinks", "lllimit": "max", "redirects": 1,
+             "titles": carta["wiki_titol"] or carta["nom"], "format": "json"}), ua)
+        pag = next(iter(w["query"]["pages"].values()))
+        return {"popularitat": len(pag.get("langlinks", [])) + 1}  # +1: l'anglès
+    terme = carta["terme_pubmed"] or f'{carta["nom"]}[tiab]'
+    d = get_json("https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi?" + urllib.parse.urlencode(
+        {"db": "pubmed", "term": terme, "retmax": 0, "retmode": "json", "tool": "BIO-cartes"}), ua)
+    return {"popularitat": int(d["esearchresult"]["count"])}
 
 def imatge(carta, ua):
-    titol = WIKI_TITLE.get(carta["nom"], carta["nom"])
+    titol = carta["wiki_titol"] or carta["nom"]
     w = get_json("https://en.wikipedia.org/w/api.php?" + urllib.parse.urlencode(
         {"action": "query", "prop": "pageimages", "piprop": "original|name", "titles": titol,
          "redirects": 1, "format": "json"}), ua)
@@ -88,12 +102,12 @@ def main():
     for carta in con.execute("SELECT * FROM carta").fetchall():
         canvis = {}
         for pas, aplica in (("uniprot", carta["font"] == "uniprot"), ("mesh", carta["font"] == "mesh"),
-                            ("imatge", carta["font"] != "uniprot")):
-            camp = "imatge_url" if pas == "imatge" else "definicio"
-            if not aplica or carta[camp]:
+                            ("imatge", carta["font"] != "uniprot"), ("popularitat", True)):
+            camp = {"imatge": "imatge_url", "popularitat": "popularitat"}.get(pas, "definicio")
+            if not aplica or carta[camp] is not None:
                 continue
             try:
-                canvis.update({"uniprot": uniprot, "mesh": mesh, "imatge": imatge}[pas](carta, ua))
+                canvis.update({"uniprot": uniprot, "mesh": mesh, "imatge": imatge, "popularitat": popularitat}[pas](carta, ua))
             except Exception as e:  # una carta amb error no atura la resta
                 print(f"  ! {carta['nom']} ({pas}): {e}")
         if canvis:
@@ -101,6 +115,10 @@ def main():
                         (*canvis.values(), carta["id"]))
             con.commit()
         print(f"{carta['nom']}: {', '.join(canvis) or 'res'}")
+    con.execute("UPDATE carta SET raresa=NULL WHERE popularitat IS NULL")
+    assigna_raresa(con)
+    con.commit()
+    print("Raresa recalculada.")
 
 if __name__ == "__main__":
     main()

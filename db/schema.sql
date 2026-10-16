@@ -16,6 +16,9 @@ CREATE TABLE IF NOT EXISTS carta (
   raresa        TEXT CHECK (raresa IN ('comuna','poc_comuna','rara','epica','llegendaria')),
   estadistiques TEXT,                     -- JSON: {"cromosoma":"17","longitud_aa":393}
   coleccions    TEXT,                     -- llista separada per comes: 'cancer,supressors'
+  etiqueta_font TEXT,                     -- etiqueta exacta a MeSH
+  wiki_titol    TEXT,                     -- títol de l'article de Wikipedia (per a la imatge)
+  terme_pubmed  TEXT,                     -- cerca a PubMed per mesurar la popularitat
   verificada    INTEGER NOT NULL DEFAULT 0,
   UNIQUE (font, font_id)
 );

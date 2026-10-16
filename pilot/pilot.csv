@@ -1,13 +1,101 @@
-categoria,nom,font,font_id,coleccions,popularitat,popularitat_tipus,estadistiques
-gen,TP53,uniprot,P04637,"cancer,supressors",9000,articles_pubmed,"{""cromosoma"":""17"",""longitud_aa"":393}"
-gen,BRCA1,uniprot,P38398,"cancer,supressors",4000,articles_pubmed,"{""cromosoma"":""17"",""longitud_aa"":1863}"
-gen,KRAS,uniprot,P01116,"cancer,oncogens",3500,articles_pubmed,"{""cromosoma"":""12"",""longitud_aa"":189}"
-gen,EGFR,uniprot,P00533,"cancer,oncogens",5000,articles_pubmed,"{""cromosoma"":""7"",""longitud_aa"":1210}"
-gen,MYC,uniprot,P01106,"cancer,oncogens",4500,articles_pubmed,"{""cromosoma"":""8"",""longitud_aa"":439}"
-tecnica,PCR,mesh,,,3000,articles_pubmed,
-tecnica,Flow cytometry,mesh,,,800,articles_pubmed,
-aparell,Thermal cycler,wikidata,,,12,llengues_wikipedia,
-aparell,Microscope,wikidata,,,120,llengues_wikipedia,
-cientific,Henrietta Lacks,wikidata,,"cancer,linies",60,llengues_wikipedia,
-linia_cellular,HeLa,cellosaurus,,"cancer,linies",100000,articles_pubmed,
-reactiu,DMSO,wikidata,,,150,llengues_wikipedia,
+categoria,nom,font,font_id,coleccions,popularitat_tipus,estadistiques,etiqueta_font,wiki_titol,terme_pubmed
+gen,TP53,uniprot,P04637,"cancer,suppressors",pubmed,"{""cromosoma"": ""17""}",,,TP53[tiab]
+gen,BRCA1,uniprot,P38398,"cancer,suppressors",pubmed,"{""cromosoma"": ""17""}",,,BRCA1[tiab]
+gen,BRCA2,uniprot,P51587,"cancer,suppressors",pubmed,"{""cromosoma"": ""13""}",,,BRCA2[tiab]
+gen,PTEN,uniprot,P60484,"cancer,suppressors",pubmed,"{""cromosoma"": ""10""}",,,PTEN[tiab]
+gen,RB1,uniprot,P06400,"cancer,suppressors",pubmed,"{""cromosoma"": ""13""}",,,RB1[tiab]
+gen,APC,uniprot,P25054,"cancer,suppressors",pubmed,"{""cromosoma"": ""5""}",,,APC[tiab]
+gen,CDKN2A,uniprot,P42771,"cancer,suppressors",pubmed,"{""cromosoma"": ""9""}",,,CDKN2A[tiab]
+gen,VHL,uniprot,P40337,"cancer,suppressors",pubmed,"{""cromosoma"": ""3""}",,,VHL[tiab]
+gen,ATM,uniprot,Q13315,"cancer,suppressors",pubmed,"{""cromosoma"": ""11""}",,,ATM[tiab]
+gen,MLH1,uniprot,P40692,"cancer,suppressors",pubmed,"{""cromosoma"": ""3""}",,,MLH1[tiab]
+gen,KRAS,uniprot,P01116,"cancer,oncogenes",pubmed,"{""cromosoma"": ""12""}",,,KRAS[tiab]
+gen,HRAS,uniprot,P01112,"cancer,oncogenes",pubmed,"{""cromosoma"": ""11""}",,,HRAS[tiab]
+gen,NRAS,uniprot,P01111,"cancer,oncogenes",pubmed,"{""cromosoma"": ""1""}",,,NRAS[tiab]
+gen,BRAF,uniprot,P15056,"cancer,oncogenes",pubmed,"{""cromosoma"": ""7""}",,,BRAF[tiab]
+gen,PIK3CA,uniprot,P42336,"cancer,oncogenes",pubmed,"{""cromosoma"": ""3""}",,,PIK3CA[tiab]
+gen,EGFR,uniprot,P00533,"cancer,oncogenes",pubmed,"{""cromosoma"": ""7""}",,,EGFR[tiab]
+gen,ERBB2,uniprot,P04626,"cancer,oncogenes",pubmed,"{""cromosoma"": ""17""}",,,ERBB2[tiab]
+gen,MYC,uniprot,P01106,"cancer,oncogenes",pubmed,"{""cromosoma"": ""8""}",,,MYC[tiab]
+gen,ABL1,uniprot,P00519,"cancer,oncogenes",pubmed,"{""cromosoma"": ""9""}",,,ABL1[tiab]
+gen,BCL2,uniprot,P10415,"cancer,oncogenes",pubmed,"{""cromosoma"": ""18""}",,,BCL2[tiab]
+gen,CDK4,uniprot,P11802,"cancer,oncogenes",pubmed,"{""cromosoma"": ""12""}",,,CDK4[tiab]
+gen,SRC,uniprot,P12931,"cancer,oncogenes",pubmed,"{""cromosoma"": ""20""}",,,SRC[tiab]
+gen,AKT1,uniprot,P31749,"cancer,oncogenes",pubmed,"{""cromosoma"": ""14""}",,,AKT1[tiab]
+gen,MTOR,uniprot,P42345,"cancer,oncogenes",pubmed,"{""cromosoma"": ""1""}",,,MTOR[tiab]
+gen,CTNNB1,uniprot,P35222,"cancer,oncogenes",pubmed,"{""cromosoma"": ""3""}",,,CTNNB1[tiab]
+gen,IDH1,uniprot,O75874,"cancer,oncogenes",pubmed,"{""cromosoma"": ""2""}",,,IDH1[tiab]
+gen,ALK,uniprot,Q9UM73,"cancer,oncogenes",pubmed,"{""cromosoma"": ""2""}",,,ALK[tiab]
+gen,MDM2,uniprot,Q00987,"cancer,oncogenes",pubmed,"{""cromosoma"": ""12""}",,,MDM2[tiab]
+gen,CD274,uniprot,Q9NZQ7,"cancer,immunotherapy",pubmed,"{""cromosoma"": ""9""}",,,CD274[tiab]
+gen,PDCD1,uniprot,Q15116,"cancer,immunotherapy",pubmed,"{""cromosoma"": ""2""}",,,PDCD1[tiab]
+tecnica,PCR,mesh,,,pubmed,,Polymerase Chain Reaction,Polymerase chain reaction,PCR[tiab]
+tecnica,Flow cytometry,mesh,,,pubmed,,Flow Cytometry,Flow cytometry,"""Flow cytometry""[tiab]"
+tecnica,Western blot,mesh,,,pubmed,,"Blotting, Western",Western blot,"""Western blot""[tiab]"
+tecnica,ELISA,mesh,,,pubmed,,Enzyme-Linked Immunosorbent Assay,ELISA,"""ELISA""[tiab]"
+tecnica,Immunohistochemistry,mesh,,,pubmed,,Immunohistochemistry,Immunohistochemistry,"""Immunohistochemistry""[tiab]"
+tecnica,Mass spectrometry,mesh,,,pubmed,,Mass Spectrometry,Mass spectrometry,"""Mass spectrometry""[tiab]"
+tecnica,DNA sequencing,mesh,,,pubmed,,"Sequence Analysis, DNA",DNA sequencing,"""DNA sequencing""[tiab]"
+tecnica,Fluorescence microscopy,mesh,,,pubmed,,"Microscopy, Fluorescence",Fluorescence microscope,"""Fluorescence microscopy""[tiab]"
+tecnica,RNA interference,mesh,,,pubmed,,RNA Interference,RNA interference,"""RNA interference""[tiab]"
+tecnica,CRISPR,mesh,,,pubmed,,CRISPR-Cas Systems,CRISPR,"""CRISPR""[tiab]"
+tecnica,Cell culture,mesh,,,pubmed,,Cell Culture Techniques,Cell culture,"""Cell culture""[tiab]"
+tecnica,Gel electrophoresis,mesh,,,pubmed,,"Electrophoresis, Agar Gel",Gel electrophoresis,"""Gel electrophoresis""[tiab]"
+tecnica,Chromatography,mesh,,,pubmed,,Chromatography,Chromatography,"""Chromatography""[tiab]"
+tecnica,Real-time PCR,mesh,,,pubmed,,Real-Time Polymerase Chain Reaction,Real-time polymerase chain reaction,"""Real-time PCR""[tiab]"
+tecnica,Immunofluorescence,mesh,,,pubmed,,Fluorescent Antibody Technique,Immunofluorescence,"""Immunofluorescence""[tiab]"
+aparell,Thermal cycler,wikidata,,,pubmed,,,Thermal cycler,"""Thermal cycler""[tiab]"
+aparell,Microscope,wikidata,,,pubmed,,,Microscope,"""Microscope""[tiab]"
+aparell,Centrifuge,wikidata,,,pubmed,,,Centrifuge,"""Centrifuge""[tiab]"
+aparell,Autoclave,wikidata,,,pubmed,,,Autoclave,"""Autoclave""[tiab]"
+aparell,Pipette,wikidata,,,pubmed,,,Pipette,"""Pipette""[tiab]"
+aparell,Spectrophotometer,wikidata,,,pubmed,,,Spectrophotometer,"""Spectrophotometer""[tiab]"
+aparell,Electron microscope,wikidata,,,pubmed,,,Electron microscope,"""Electron microscope""[tiab]"
+aparell,Mass spectrometer,wikidata,,,pubmed,,,Mass spectrometer,"""Mass spectrometer""[tiab]"
+aparell,Biosafety cabinet,wikidata,,,pubmed,,,Biosafety cabinet,"""Biosafety cabinet""[tiab]"
+aparell,Microplate reader,wikidata,,,pubmed,,,Microplate reader,"""Microplate reader""[tiab]"
+aparell,Hemocytometer,wikidata,,,pubmed,,,Hemocytometer,"""Hemocytometer""[tiab]"
+aparell,Magnetic stirrer,wikidata,,,pubmed,,,Magnetic stirrer,"""Magnetic stirrer""[tiab]"
+cientific,Henrietta Lacks,wikidata,,"cancer,cell-lines",wiki_langs,,,Henrietta Lacks,
+cientific,Marie Curie,wikidata,,nobel,wiki_langs,,,Marie Curie,
+cientific,Rosalind Franklin,wikidata,,,wiki_langs,,,Rosalind Franklin,
+cientific,James Watson,wikidata,,nobel,wiki_langs,,,James Watson,
+cientific,Francis Crick,wikidata,,nobel,wiki_langs,,,Francis Crick,
+cientific,Peyton Rous,wikidata,,"cancer,nobel",wiki_langs,,,Peyton Rous,
+cientific,Harold Varmus,wikidata,,"cancer,nobel",wiki_langs,,,Harold Varmus,
+cientific,J. Michael Bishop,wikidata,,"cancer,nobel",wiki_langs,,,J. Michael Bishop,
+cientific,Robert Weinberg,wikidata,,cancer,wiki_langs,,,Robert Weinberg,
+cientific,Bert Vogelstein,wikidata,,cancer,wiki_langs,,,Bert Vogelstein,
+cientific,Elizabeth Blackburn,wikidata,,nobel,wiki_langs,,,Elizabeth Blackburn,
+cientific,Carol W. Greider,wikidata,,nobel,wiki_langs,,,Carol W. Greider,
+cientific,Tasuku Honjo,wikidata,,"cancer,nobel",wiki_langs,,,Tasuku Honjo,
+cientific,James P. Allison,wikidata,,"cancer,nobel",wiki_langs,,,James P. Allison,
+cientific,Paul Ehrlich,wikidata,,nobel,wiki_langs,,,Paul Ehrlich,
+cientific,Rudolf Virchow,wikidata,,cancer,wiki_langs,,,Rudolf Virchow,
+cientific,Barbara McClintock,wikidata,,nobel,wiki_langs,,,Barbara McClintock,
+cientific,Kary Mullis,wikidata,,nobel,wiki_langs,,,Kary Mullis,
+cientific,Jennifer Doudna,wikidata,,nobel,wiki_langs,,,Jennifer Doudna,
+cientific,Emmanuelle Charpentier,wikidata,,nobel,wiki_langs,,,Emmanuelle Charpentier,
+reactiu,DMSO,wikidata,,,pubmed,,,Dimethyl sulfoxide,DMSO[tiab]
+reactiu,Trypsin,wikidata,,,pubmed,,,Trypsin,Trypsin[tiab]
+reactiu,Ethidium bromide,wikidata,,,pubmed,,,Ethidium bromide,"""ethidium bromide""[tiab]"
+reactiu,Agarose,wikidata,,,pubmed,,,Agarose,Agarose[tiab]
+reactiu,Formaldehyde,wikidata,,,pubmed,,,Formaldehyde,Formaldehyde[tiab]
+reactiu,SDS,wikidata,,,pubmed,,,Sodium dodecyl sulfate,"""sodium dodecyl sulfate""[tiab]"
+reactiu,PBS,wikidata,,,pubmed,,,Phosphate-buffered saline,"""phosphate buffered saline""[tiab]"
+reactiu,Tris,wikidata,,,pubmed,,,Tris,Tris[tiab]
+linia_cellular,HeLa,cellosaurus,,"cancer,cell-lines",pubmed,,,HeLa,"""HeLa""[tiab]"
+linia_cellular,MCF-7,cellosaurus,,"cancer,cell-lines",pubmed,,,MCF-7,"""MCF-7""[tiab]"
+linia_cellular,A549,cellosaurus,,"cancer,cell-lines",pubmed,,,A549 cell,"""A549""[tiab]"
+linia_cellular,HEK293,cellosaurus,,"cancer,cell-lines",pubmed,,,HEK 293 cells,"""HEK293""[tiab]"
+linia_cellular,Jurkat,cellosaurus,,"cancer,cell-lines",pubmed,,,Jurkat cells,"""Jurkat""[tiab]"
+linia_cellular,K562,cellosaurus,,"cancer,cell-lines",pubmed,,,K562 cells,"""K562""[tiab]"
+linia_cellular,U2OS,cellosaurus,,"cancer,cell-lines",pubmed,,,U2OS,"""U2OS""[tiab]"
+linia_cellular,HCT116,cellosaurus,,"cancer,cell-lines",pubmed,,,HCT116,"""HCT116""[tiab]"
+concepte,Neoplasms,mesh,,cancer,pubmed,,Neoplasms,Cancer,"""Neoplasms""[tiab]"
+concepte,Neoplasm metastasis,mesh,,cancer,pubmed,,Neoplasm Metastasis,Metastasis,"""Neoplasm metastasis""[tiab]"
+concepte,Apoptosis,mesh,,cancer,pubmed,,Apoptosis,Apoptosis,"""Apoptosis""[tiab]"
+concepte,Oncogenes,mesh,,cancer,pubmed,,Oncogenes,Oncogene,"""Oncogenes""[tiab]"
+concepte,Tumor suppressor genes,mesh,,cancer,pubmed,,"Genes, Tumor Suppressor",Tumor suppressor gene,"""Tumor suppressor genes""[tiab]"
+concepte,Carcinogenesis,mesh,,cancer,pubmed,,Carcinogenesis,Carcinogenesis,"""Carcinogenesis""[tiab]"
+concepte,Immunotherapy,mesh,,cancer,pubmed,,Immunotherapy,Cancer immunotherapy,"""Immunotherapy""[tiab]"
