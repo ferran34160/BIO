@@ -64,7 +64,7 @@ cientific,Francis Crick,wikidata,,nobel,wiki_langs,,,Francis Crick,
 cientific,Peyton Rous,wikidata,,"cancer,nobel",wiki_langs,,,Peyton Rous,
 cientific,Harold Varmus,wikidata,,"cancer,nobel",wiki_langs,,,Harold Varmus,
 cientific,J. Michael Bishop,wikidata,,"cancer,nobel",wiki_langs,,,J. Michael Bishop,
-cientific,Robert Weinberg,wikidata,,cancer,wiki_langs,,,Robert Weinberg,
+cientific,Robert Weinberg,wikidata,,cancer,wiki_langs,,,Robert A. Weinberg,
 cientific,Bert Vogelstein,wikidata,,cancer,wiki_langs,,,Bert Vogelstein,
 cientific,Elizabeth Blackburn,wikidata,,nobel,wiki_langs,,,Elizabeth Blackburn,
 cientific,Carol W. Greider,wikidata,,nobel,wiki_langs,,,Carol W. Greider,
@@ -90,7 +90,7 @@ linia_cellular,A549,cellosaurus,,"cancer,cell-lines",pubmed,,,A549 cell,"""A549"
 linia_cellular,HEK293,cellosaurus,,"cancer,cell-lines",pubmed,,,HEK 293 cells,"""HEK293""[tiab]"
 linia_cellular,Jurkat,cellosaurus,,"cancer,cell-lines",pubmed,,,Jurkat cells,"""Jurkat""[tiab]"
 linia_cellular,K562,cellosaurus,,"cancer,cell-lines",pubmed,,,K562 cells,"""K562""[tiab]"
-linia_cellular,U2OS,cellosaurus,,"cancer,cell-lines",pubmed,,,U2OS,"""U2OS""[tiab]"
+linia_cellular,U2OS,cellosaurus,,"cancer,cell-lines",pubmed,,,U-2 OS,"""U2OS""[tiab]"
 linia_cellular,HCT116,cellosaurus,,"cancer,cell-lines",pubmed,,,HCT116,"""HCT116""[tiab]"
 concepte,Neoplasms,mesh,,cancer,pubmed,,Neoplasms,Cancer,"""Neoplasms""[tiab]"
 concepte,Neoplasm metastasis,mesh,,cancer,pubmed,,Neoplasm Metastasis,Metastasis,"""Neoplasm metastasis""[tiab]"
