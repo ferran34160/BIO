@@ -4,6 +4,8 @@ Només biblioteca estàndard. Ús:  python descarrega_pilot.py --contacte correu
   UniProt  -> definició (comentari FUNCTION), longitud de la proteïna  (cartes categoria 'gen')
   MeSH     -> definició (scope note) per a cartes amb font 'mesh'
   Wikipedia/Commons -> imatge amb autor i llicència (només llicències lliures)
+  PDB (via UniProt) -> imatge de l'estructura 3D de la proteïna per a les cartes de gens
+  Wikipedia (primer paràgraf, CC BY-SA 4.0) -> definició per a les cartes que no són a UniProt ni MeSH
   PubMed / Wikipedia -> popularitat (articles a PubMed, o nombre de llengües de la Viquipèdia per a científics)
 Al final recalcula la raresa. Es pot tornar a executar: no refà el que ja està omplert.
 Les cartes queden amb verificada=0: cal revisar-les abans de donar-les per bones.
@@ -61,6 +63,46 @@ def mesh(carta, ua):
     return {"font_id": uri.rsplit("/", 1)[-1], "definicio": b[0]["note"]["value"],
             "definicio_font": f"MeSH (NLM), descriptor '{label}'"}
 
+def definicio_wikipedia(carta, ua):
+    titol = carta["wiki_titol"] or carta["nom"]
+    d = get_json("https://en.wikipedia.org/api/rest_v1/page/summary/" + urllib.parse.quote(titol.replace(" ", "_"), safe=""), ua)
+    if d.get("type") != "standard" or not d.get("extract"):
+        print(f"    Wikipedia: «{titol}» no és un article normal (desambiguació o buit)")
+        return {}
+    return {"definicio": d["extract"],
+            "definicio_font": f"Wikipedia, article '{d['title']}' (CC BY-SA 4.0)"}
+
+def estructura_pdb(carta, ua):
+    """Tria l'estructura del PDB que cobreix més de la proteïna (a igualtat, millor resolució) i en dóna la imatge."""
+    d = get_json(f"https://rest.uniprot.org/uniprotkb/{carta['font_id']}.json", ua)
+    millor = None
+    for ref in d.get("uniProtKBCrossReferences", []):
+        if ref.get("database") != "PDB":
+            continue
+        prop = {p["key"]: p["value"] for p in ref.get("properties", [])}
+        cobertura = 0
+        for tram in re.findall(r"=(\d+)-(\d+)", prop.get("Chains", "")):
+            cobertura = max(cobertura, int(tram[1]) - int(tram[0]) + 1)
+        try:
+            resolucio = float(prop.get("Resolution", "").split()[0])
+        except (ValueError, IndexError):
+            resolucio = 99.0
+        clau = (-cobertura, resolucio)
+        if millor is None or clau < millor[0]:
+            millor = (clau, ref["id"].lower())
+    if not millor:
+        print("    PDB: cap estructura per a aquesta proteïna")
+        return {}
+    pdb = millor[1]
+    url = f"https://cdn.rcsb.org/images/structures/{pdb[1:3]}/{pdb}/{pdb}_assembly-1.jpeg"
+    try:
+        urllib.request.urlopen(urllib.request.Request(url, method="HEAD", headers={"User-Agent": ua}), timeout=30).close()
+    except urllib.error.HTTPError as e:
+        print(f"    PDB: la imatge {url} no existeix (HTTP {e.code})")
+        return {}
+    return {"imatge_url": url, "imatge_autor": f"RCSB PDB entry {pdb.upper()}",
+            "imatge_llicencia": "CC0 1.0 (PDB data, to be verified)"}
+
 def popularitat(carta, ua):
     if carta["popularitat_tipus"] == "wiki_langs":
         w = get_json("https://en.wikipedia.org/w/api.php?" + urllib.parse.urlencode(
@@ -105,12 +147,14 @@ def main():
     for carta in con.execute("SELECT * FROM carta").fetchall():
         canvis = {}
         for pas, aplica in (("uniprot", carta["font"] == "uniprot"), ("mesh", carta["font"] == "mesh"),
+                            ("wiki_def", carta["font"] != "uniprot"), ("estructura", carta["font"] == "uniprot"),
                             ("imatge", carta["font"] != "uniprot"), ("popularitat", True)):
-            camp = {"imatge": "imatge_url", "popularitat": "popularitat"}.get(pas, "definicio")
-            if not aplica or carta[camp] is not None:
+            camp = {"imatge": "imatge_url", "estructura": "imatge_url", "popularitat": "popularitat"}.get(pas, "definicio")
+            if not aplica or carta[camp] is not None or camp in canvis:
                 continue
             try:
-                canvis.update({"uniprot": uniprot, "mesh": mesh, "imatge": imatge, "popularitat": popularitat}[pas](carta, ua))
+                canvis.update({"uniprot": uniprot, "mesh": mesh, "imatge": imatge, "popularitat": popularitat,
+                              "wiki_def": definicio_wikipedia, "estructura": estructura_pdb}[pas](carta, ua))
             except Exception as e:  # una carta amb error no atura la resta
                 print(f"  ! {carta['nom']} ({pas}): {e}")
         if canvis:
