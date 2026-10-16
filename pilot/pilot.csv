@@ -1,0 +1,13 @@
+categoria,nom,font,font_id,coleccions,popularitat,popularitat_tipus,estadistiques
+gen,TP53,uniprot,P04637,"cancer,supressors",9000,articles_pubmed,"{""cromosoma"":""17"",""longitud_aa"":393}"
+gen,BRCA1,uniprot,P38398,"cancer,supressors",4000,articles_pubmed,"{""cromosoma"":""17"",""longitud_aa"":1863}"
+gen,KRAS,uniprot,P01116,"cancer,oncogens",3500,articles_pubmed,"{""cromosoma"":""12"",""longitud_aa"":189}"
+gen,EGFR,uniprot,P00533,"cancer,oncogens",5000,articles_pubmed,"{""cromosoma"":""7"",""longitud_aa"":1210}"
+gen,MYC,uniprot,P01106,"cancer,oncogens",4500,articles_pubmed,"{""cromosoma"":""8"",""longitud_aa"":439}"
+tecnica,PCR,mesh,,,3000,articles_pubmed,
+tecnica,Citometria de flux,mesh,,,800,articles_pubmed,
+aparell,Termociclador,wikidata,,,12,llengues_wikipedia,
+aparell,Microscopi,wikidata,,,120,llengues_wikipedia,
+cientific,Henrietta Lacks,wikidata,,"cancer,linies",60,llengues_wikipedia,
+linia_cellular,HeLa,cellosaurus,,"cancer,linies",100000,articles_pubmed,
+reactiu,DMSO,wikidata,,,150,llengues_wikipedia,
