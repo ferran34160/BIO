@@ -1,0 +1,70 @@
+/* Cartes: cada raresa té el seu propi disseny (fons, marc, forma de la imatge, ornaments i insígnia), no només el color del marc. */
+.carta{--bw:3px;--bgA:#20262e;--bgB:#181d24;--fr1:#6b7280;--fr2:#9ca3af;--glow:none;
+ position:relative;overflow:hidden;display:flex;flex-direction:column;gap:8px;padding:10px;border-radius:14px;border:var(--bw) solid transparent;
+ background:linear-gradient(160deg,var(--bgA),var(--bgB)) padding-box,linear-gradient(135deg,var(--fr1),var(--fr2),var(--fr1)) border-box;box-shadow:var(--glow);color:#e8ecf2}
+.carta>*:not(.orn){position:relative;z-index:1}
+.carta::before{content:"";position:absolute;inset:0;pointer-events:none;z-index:0}
+header{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-start;gap:4px 8px}
+h2{margin:0;font-size:18px;line-height:1.15;flex:1 1 auto;min-width:0;overflow-wrap:break-word}
+.rb{flex:0 0 auto;display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.5px;padding:3px 9px;border-radius:999px;color:#c3cad4;white-space:nowrap}
+.rb b{font-size:9px;letter-spacing:1px;font-weight:700}
+.img{height:160px;background:#0b0f14;overflow:hidden;position:relative;display:flex;border-radius:8px;border:1px solid #ffffff14}
+.img img{width:100%;height:100%;object-fit:contain}
+.cred{position:absolute;bottom:0;left:0;right:0;font-size:10px;background:#000a;padding:2px 6px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.sense-img{margin:auto;color:var(--fr2);display:flex;flex-direction:column;align-items:center;gap:4px;opacity:.9}.sense-img svg{width:96px;height:96px}.sense-img span{font-size:11px;color:#7b8794}
+.cat{display:flex;align-items:center;gap:8px;font-size:12px;color:#a9b4c2}
+.def{margin:0;font-size:13px;line-height:1.4;display:-webkit-box;-webkit-line-clamp:5;-webkit-box-orient:vertical;overflow:hidden}.def.buit{color:#7b8794;font-style:italic}
+.font{margin:0;font-size:10px;color:#7b8794}.stats{list-style:none;margin:0;padding:0;display:flex;gap:12px;font-size:12px}.stats span{color:#a9b4c2;margin-right:4px}
+.orn{position:absolute;z-index:2;width:14px;height:14px;display:none;pointer-events:none}
+.orn.tl{top:5px;left:5px}.orn.tr{top:5px;right:5px}.orn.bl{bottom:5px;left:5px}.orn.br{bottom:5px;right:5px}
+
+/* COMUNA: pla i sobri */
+.carta[data-r=comuna]{--bw:2px}
+
+/* POC COMUNA: verd, ratlles diagonals, imatge arrodonida */
+.carta[data-r=poc_comuna]{--bgA:#17382b;--bgB:#0d211a;--fr1:#2f9a60;--fr2:#86e8ae;--bw:2px;--glow:0 0 8px #3fa96844}
+.carta[data-r=poc_comuna]::before{background:repeating-linear-gradient(135deg,#ffffff0b 0 6px,transparent 6px 12px)}
+.carta[data-r=poc_comuna] .rb{background:#1f6b43;color:#d2fbe4}
+.carta[data-r=poc_comuna] .img{border-radius:16px;border:2px solid #3fa96888}
+.carta[data-r=poc_comuna] .cat::after,.carta[data-r=rara] .cat::after,.carta[data-r=epica] .cat::after,.carta[data-r=llegendaria] .cat::after{content:"";flex:1;height:1px;background:linear-gradient(90deg,var(--fr1),transparent)}
+
+/* RARA: blau metàl·lic, doble marc, graella, imatge amb cantonades tallades, claudàtors a les cantonades */
+.carta[data-r=rara]{--bgA:#12407a;--bgB:#091a3a;--fr1:#2f80e6;--fr2:#a6d4ff;--glow:0 0 14px #3b8ee866,inset 0 0 0 2px #091a3a,inset 0 0 0 3px #3b8ee877}
+.carta[data-r=rara]::before{background:linear-gradient(#ffffff0c 1px,transparent 1px) 0 0/16px 16px,linear-gradient(90deg,#ffffff0c 1px,transparent 1px) 0 0/16px 16px}
+.carta[data-r=rara] .rb{background:linear-gradient(135deg,#2a86f0,#0f4aa6);color:#fff;box-shadow:0 0 8px #3b8ee8aa}
+.carta[data-r=rara] h2{color:#e3f0ff}
+.carta[data-r=rara] .img{border:0;background:#061428;clip-path:polygon(12px 0,calc(100% - 12px) 0,100% 12px,100% calc(100% - 12px),calc(100% - 12px) 100%,12px 100%,0 calc(100% - 12px),0 12px)}
+.carta[data-r=rara] .orn{display:block;border:2px solid #a6d4ff}
+.carta[data-r=rara] .orn.tl{border-right:0;border-bottom:0}.carta[data-r=rara] .orn.tr{border-left:0;border-bottom:0}
+.carta[data-r=rara] .orn.bl{border-right:0;border-top:0}.carta[data-r=rara] .orn.br{border-left:0;border-top:0}
+
+/* ÈPICA: lila-magenta, purpurina, brillantor, imatge octogonal, diamants a les cantonades */
+.carta[data-r=epica]{--bgA:#5a1f94;--bgB:#14082b;--fr1:#b45cf5;--fr2:#ff9ae8;--glow:0 0 20px #b45cf5aa,inset 0 0 0 2px #14082b,inset 0 0 0 3px #d28bff88}
+.carta[data-r=epica]::before{background:radial-gradient(circle at 18% 28%,#fff 0 1px,transparent 2px),radial-gradient(circle at 72% 58%,#ffd9ff 0 1px,transparent 2px),radial-gradient(circle at 88% 18%,#fff 0 1.5px,transparent 2.5px),radial-gradient(circle at 38% 86%,#ffd9ff 0 1px,transparent 2px),radial-gradient(circle at 60% 12%,#fff 0 1px,transparent 2px);animation:twinkle 2.4s ease-in-out infinite alternate}
+@keyframes twinkle{from{opacity:.25}to{opacity:.95}}
+.carta[data-r=epica] .rb{background:linear-gradient(135deg,#c76bff,#6a2bb8);color:#fff;box-shadow:0 0 10px #c76bffcc}
+.carta[data-r=epica] h2{color:#f6e3ff;text-shadow:0 0 10px #c76bff99}
+.carta[data-r=epica] .img{border:0;background:#0d0420;box-shadow:inset 0 0 24px #b45cf577;clip-path:polygon(20px 0,calc(100% - 20px) 0,100% 20px,100% calc(100% - 20px),calc(100% - 20px) 100%,20px 100%,0 calc(100% - 20px),0 20px)}
+.carta[data-r=epica] .orn{display:block;width:10px;height:10px;transform:rotate(45deg);background:linear-gradient(135deg,#ff9ae8,#b45cf5);box-shadow:0 0 8px #ff9ae8}
+.carta[data-r=epica] .orn.tl{top:7px;left:7px}.carta[data-r=epica] .orn.tr{top:7px;right:7px}.carta[data-r=epica] .orn.bl{bottom:7px;left:7px}.carta[data-r=epica] .orn.br{bottom:7px;right:7px}
+
+/* LLEGENDÀRIA: or, raigs giratoris, imatge en arc, estrelles a les cantonades, títol daurat */
+.carta[data-r=llegendaria]{--bw:4px;--bgA:#7d5608;--bgB:#241601;--fr1:#fff1a8;--fr2:#c78a0e;--glow:0 0 26px #ffb300cc,inset 0 0 0 2px #241601,inset 0 0 0 3px #ffe27acc}
+.carta[data-r=llegendaria]::before{inset:-70%;background:repeating-conic-gradient(from 0deg at 50% 50%,#ffe27a30 0 7deg,transparent 7deg 14deg);animation:spin 40s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.carta[data-r=llegendaria] .rb{background:linear-gradient(135deg,#fff1a8,#e0a21a);color:#3a2500;box-shadow:0 0 12px #ffd54aaa}
+.carta[data-r=llegendaria] h2{background:linear-gradient(180deg,#fff7c9,#ffc83a);-webkit-background-clip:text;background-clip:text;color:transparent;text-shadow:none;filter:drop-shadow(0 1px 3px #000a)}
+.carta[data-r=llegendaria] .img{border:2px solid #ffe27a;border-radius:50% 50% 10px 10px/26% 26% 10px 10px;background:radial-gradient(circle at 50% 30%,#4a3205,#120b01);box-shadow:inset 0 0 22px #ffb30088}
+.carta[data-r=llegendaria] .orn{display:block;width:16px;height:16px;background:#ffe27a;clip-path:polygon(50% 0,61% 35%,98% 35%,68% 57%,79% 91%,50% 70%,21% 91%,32% 57%,2% 35%,39% 35%);filter:drop-shadow(0 0 4px #ffb300)}
+.carta[data-r=llegendaria] .def{color:#fff4d4}
+
+/* les cantonades ornamentades deixen espai al títol */
+.carta[data-r=epica] header,.carta[data-r=llegendaria] header{padding:0 12px}
+.carta[data-r=epica],.carta[data-r=llegendaria]{padding-top:14px}
+
+/* brillantor holo (rara o millor) */
+.carta[data-r=rara]::after,.carta[data-r=epica]::after,.carta[data-r=llegendaria]::after{content:"";position:absolute;inset:0;pointer-events:none;z-index:3;
+ background:linear-gradient(115deg,transparent 30%,#ffffff26 45%,#7fd6ff26 50%,#ff9ae826 55%,transparent 70%);background-size:250% 100%;animation:holo 4s linear infinite}
+.carta[data-r=llegendaria]::after{background-image:linear-gradient(115deg,transparent 25%,#ffe27a55 45%,#fff7 50%,#ffb84a55 55%,transparent 75%);animation-duration:2.6s}
+@keyframes holo{from{background-position:150% 0}to{background-position:-150% 0}}
+@media(prefers-reduced-motion:reduce){.carta::before,.carta::after{animation:none!important}}

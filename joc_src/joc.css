@@ -38,8 +38,8 @@ h2.sec{margin:20px 0 8px;font-size:18px;font-weight:700}
 .packinfo{background:var(--surface2);border-radius:20px;padding:14px 32px;margin-top:8px}.packinfo b{display:block;font-size:24px;color:var(--primary)}.packinfo span{color:var(--onv)}
 /* cartes i quadrícules */
 .grid.compact{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;padding:0}
-.cell{position:relative;cursor:pointer;min-width:0}.cell .carta{height:100%;padding:6px;gap:4px;border-width:2px;border-radius:12px}
-.compact header{flex-wrap:wrap;gap:2px 6px}.compact h2{font-size:14px;overflow-wrap:break-word;min-width:0}.compact header span{font-size:10px}.compact .img{height:96px}
+.cell{position:relative;cursor:pointer;min-width:0}.cell .carta{height:100%;padding:6px;gap:4px;border-radius:12px;--bw:2px}
+.compact header{flex-wrap:wrap;gap:2px 6px}.compact h2{font-size:14px;overflow-wrap:break-word;min-width:0}.compact .rb{font-size:9px;padding:2px 6px}.compact .rb b{font-size:7px}.compact .orn{transform:scale(.7)}.compact .orn.bl,.compact .orn.br{display:none!important}.compact .carta[data-r=rara] .orn{display:none!important}.compact .carta[data-r=llegendaria]{--bw:3px}.compact .img{height:96px}
 .compact .def{font-size:12px;-webkit-line-clamp:3}.compact .font,.compact .stats,.compact .cat{display:none}.compact .cred{font-size:8px}.compact .sense-img svg{width:56px;height:56px}
 .qty{position:absolute;top:-6px;right:-4px;background:var(--primary);color:var(--onprimary);border-radius:11px;font-size:12px;font-weight:700;padding:1px 7px;z-index:2}
 .cell.dim .carta{opacity:.4}.cell.dimsel .carta{opacity:.55}
@@ -66,7 +66,7 @@ h2.sec{margin:20px 0 8px;font-size:18px;font-weight:700}
 .fin{position:absolute;inset:0;transform-style:preserve-3d;transition:transform .55s}.flipped .fin{transform:rotateY(180deg)}.leg .fin{transition-duration:1.8s}
 .face{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden}
 .back{background:var(--secondary);border-radius:18px;padding:5px}.back div{height:100%;border-radius:14px;background:var(--surface2);display:flex;align-items:center;justify-content:center;font-size:56px;font-weight:700;color:#fff}
-.front{transform:rotateY(180deg)}.front .carta{height:100%;overflow:hidden;border-width:3px}.front .cell{height:100%}
+.front{transform:rotateY(180deg)}.front .carta{height:100%;overflow:hidden}.front .cell{height:100%}
 .tag{display:block;width:max-content;margin:8px auto 0;font-size:12px;font-weight:700;color:#000;border-radius:8px;padding:2px 10px}
 .dots{display:flex;gap:8px;margin:10px 0}.dots i{width:10px;height:10px;border-radius:50%;background:#ffffff40}.dots i.on{background:var(--primary)}
 .nav2{display:flex;align-items:center;gap:16px;margin-bottom:10px}.nav2 .iconbtn:disabled{opacity:.3}
@@ -76,7 +76,7 @@ h2.sec{margin:20px 0 8px;font-size:18px;font-weight:700}
 /* fitxa de detall */
 .modal{position:fixed;inset:0;z-index:20;background:#000c;display:flex;align-items:flex-end;justify-content:center}
 .sheet{background:var(--bg);width:100%;max-width:460px;max-height:92vh;overflow:auto;border-radius:16px 16px 0 0;padding:14px;padding-bottom:calc(14px + env(safe-area-inset-bottom));display:flex;flex-direction:column;gap:10px}
-.sheet .img{height:200px}.sheet .def{display:block;-webkit-line-clamp:unset;font-size:14px;max-height:170px;overflow:auto}.sheet .carta{border-width:3px}
+.sheet .img{height:200px}.sheet .def{display:block;-webkit-line-clamp:unset;font-size:14px;max-height:170px;overflow:auto}
 .acts{position:sticky;bottom:-14px;background:var(--bg);padding:8px 0;display:flex;flex-direction:column;gap:8px}
 textarea{width:100%;height:110px;background:var(--surface);color:var(--text);border:1px solid var(--outlinev);border-radius:12px;font-size:12px}
 @media(min-width:640px){.grid.compact{grid-template-columns:repeat(auto-fill,minmax(190px,1fr))}.modal{align-items:center}.sheet{border-radius:16px}}

@@ -47,29 +47,17 @@ def carta_html(c):
                     for k, v in json.loads(c["estadistiques"] or "{}").items())
     defin = (f'<p class="def">{e(c["definicio"])}</p><p class="font">Source: {e(c["definicio_font"] or "")}</p>'
              if c["definicio"] else '<p class="def buit">Definition pending</p>')
-    return (f'<article class="carta" data-r="{c["raresa"] or "comuna"}" style="--r:{color}"><header><h2>{e(c["nom"])}</h2>'
-            f'<span>{e(ETIQ_RARESA.get(c["raresa"], ""))}</span></header>'
+    r = c["raresa"] or "comuna"
+    estrelles = "★" * (list(COLORS).index(r) + 1)
+    return (f'<article class="carta" data-r="{r}" style="--r:{color}"><i class="orn tl"></i><i class="orn tr"></i>'
+            f'<i class="orn bl"></i><i class="orn br"></i><header><h2>{e(c["nom"])}</h2>'
+            f'<span class="rb">{e(ETIQ_RARESA.get(r, ""))}<b>{estrelles}</b></span></header>'
             f'<div class="img">{img}</div><div class="cat">{e(ETIQ_CAT[c["categoria"]])}</div>'
             f'{defin}<ul class="stats">{stats}</ul></article>')
 
-CSS = """body{margin:0;font:15px system-ui,sans-serif;background:#10141b;color:#e8ecf2}
+CSS = ("""body{margin:0;font:15px system-ui,sans-serif;background:#10141b;color:#e8ecf2}
 h1{padding:20px 16px 0;margin:0}.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:16px;padding:16px}
-.carta{background:#1a212c;border:3px solid var(--r);border-radius:14px;padding:10px;display:flex;flex-direction:column;gap:8px}
-header{display:flex;justify-content:space-between;align-items:baseline;gap:8px}h2{margin:0;font-size:18px}
-header span{color:var(--r);font-size:12px;font-weight:700;text-transform:uppercase}
-.img{height:160px;background:#0c1016;border-radius:8px;overflow:hidden;position:relative;display:flex}
-.img img{width:100%;height:100%;object-fit:contain}.cred{position:absolute;bottom:0;left:0;right:0;font-size:10px;
-background:#000a;padding:2px 6px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.sense-img{margin:auto;color:var(--r);display:flex;flex-direction:column;align-items:center;gap:4px;opacity:.9}.sense-img svg{width:96px;height:96px}.sense-img span{font-size:11px;color:#6b7686}.cat{font-size:12px;color:#9aa6b6}.def{margin:0;font-size:13px;line-height:1.4;
-display:-webkit-box;-webkit-line-clamp:5;-webkit-box-orient:vertical;overflow:hidden}.def.buit{color:#6b7686;font-style:italic}
-.font{margin:0;font-size:10px;color:#6b7686}.stats{list-style:none;margin:0;padding:0;display:flex;gap:12px;font-size:12px}
-.stats span{color:#9aa6b6;margin-right:4px}
-.carta{position:relative;overflow:hidden}
-.carta[data-r=rara]::after,.carta[data-r=epica]::after,.carta[data-r=llegendaria]::after{content:"";position:absolute;inset:0;pointer-events:none;
-background:linear-gradient(115deg,transparent 30%,#ffffff22 45%,#7fd6ff22 50%,#ff9ae822 55%,transparent 70%);background-size:250% 100%;animation:holo 4s linear infinite}
-.carta[data-r=llegendaria]::after{background-image:linear-gradient(115deg,transparent 25%,#ffe27a44 45%,#fff6 50%,#ffb84a44 55%,transparent 75%);animation-duration:2.6s}
-@keyframes holo{from{background-position:150% 0}to{background-position:-150% 0}}
-@media(prefers-reduced-motion:reduce){.carta::after{animation:none!important}}"""
+""" + (Path(__file__).parent / "joc_src" / "carta.css").read_text(encoding="utf-8"))
 
 def main():
     con = sqlite3.connect(ARREL / "db" / "cartes.sqlite")

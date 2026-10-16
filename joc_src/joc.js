@@ -155,7 +155,7 @@ function packSvg(){
   <text x="145" y="488" text-anchor="middle" font-family="system-ui,sans-serif" font-weight="700" font-size="9" letter-spacing="3" fill="#bff8ff" opacity=".8">RESEARCH PACK</text>
   <rect width="290" height="500" fill="url(#sh)"/></g></svg>`;
 }
-function ghostCard(c){return `<article class="carta ghost" style="--r:${c.color}"><header><h2>${esc(c.nom)}</h2><span>${c.rlabel}</span></header>
+function ghostCard(c){return `<article class="carta ghost" data-r="${c.raresa}" style="--r:${c.color}"><header><h2>${esc(c.nom)}</h2><span class="rb">${c.rlabel}</span></header>
   <div class="img"><div class="sense-img"><svg viewBox="0 0 100 100">${c.icona}</svg><span>${c.cat}</span></div></div></article>`;}
 function cell(c,o={}){const n=own(c.id), sel=SEL.on&&SEL.ids.has(c.id);
  return `<div class="cell ${o.dim&&!n?'dim':''} ${SEL.on&&!sel?'dimsel':''}" data-a="open" data-v="${c.id}">${SEL.on&&o.sel?`<span class="chk ${sel?'on':''}">${sel?IC.check:''}</span>`:''}${n>1?`<span class="qty">×${n}</span>`:''}${c.html}</div>`;}
