@@ -1,5 +1,5 @@
 """Genera web/index.html (àlbum estàtic) a partir de db/cartes.sqlite. Ús: python genera_web.py"""
-import html, json, sqlite3
+import html, json, re, sqlite3
 from pathlib import Path
 
 ARREL = Path(__file__).parent
@@ -34,6 +34,11 @@ ICONES = {
     "descobriment": '<path d="M50 8l11 27 29 3-22 20 7 29-25-15-25 15 7-29L10 38l29-3z" fill="none" stroke="currentColor" stroke-width="4" stroke-linejoin="round"/>',
 }
 
+def neteja_def(t):
+    """Treu les referències (PubMed:123, PubMed:456) que UniProt posa dins del text; la font de la carta ja les cita."""
+    t = re.sub(r"\s*\((?:\s*PubMed:\d+[,;\s]*)+\)", "", t)
+    return re.sub(r"\s+([.,;])", r"\1", t)
+
 def carta_html(c):
     e = html.escape
     color = COLORS.get(c["raresa"], COLORS["comuna"])
@@ -45,7 +50,7 @@ def carta_html(c):
                f'<span>{e(ETIQ_CAT[c["categoria"]])}</span></div>')
     stats = "".join(f'<li><span>{e(ETIQ_STAT.get(k, k))}</span><b>{e(str(v))}</b></li>'
                     for k, v in json.loads(c["estadistiques"] or "{}").items())
-    defin = (f'<p class="def">{e(c["definicio"])}</p>' if c["definicio"] else '<p class="def buit">Definition pending</p>')
+    defin = (f'<p class="def">{e(neteja_def(c["definicio"]))}</p>' if c["definicio"] else '<p class="def buit">Definition pending</p>')
     font = f'<p class="font">Source: {e(c["definicio_font"] or "")}</p>' if c["definicio"] else ""
     r = c["raresa"] or "comuna"
     estrelles = "★" * (list(COLORS).index(r) + 1)
