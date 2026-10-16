@@ -1,13 +1,13 @@
 categoria,nom,font,font_id,coleccions,popularitat_tipus,estadistiques,etiqueta_font,wiki_titol,terme_pubmed
-gen,TP53,uniprot,P04637,"cancer,suppressors",pubmed,"{""cromosoma"": ""17""}",,,TP53[tiab]
+gen,TP53,uniprot,P04637,"cancer,suppressors",pubmed,"{""cromosoma"": ""17""}",,,(TP53[tiab] OR p53[tiab])
 gen,BRCA1,uniprot,P38398,"cancer,suppressors",pubmed,"{""cromosoma"": ""17""}",,,BRCA1[tiab]
 gen,BRCA2,uniprot,P51587,"cancer,suppressors",pubmed,"{""cromosoma"": ""13""}",,,BRCA2[tiab]
 gen,PTEN,uniprot,P60484,"cancer,suppressors",pubmed,"{""cromosoma"": ""10""}",,,PTEN[tiab]
 gen,RB1,uniprot,P06400,"cancer,suppressors",pubmed,"{""cromosoma"": ""13""}",,,RB1[tiab]
-gen,APC,uniprot,P25054,"cancer,suppressors",pubmed,"{""cromosoma"": ""5""}",,,APC[tiab]
+gen,APC,uniprot,P25054,"cancer,suppressors",pubmed,"{""cromosoma"": ""5""}",,,"(""APC gene""[tiab] OR ""adenomatous polyposis coli""[tiab] OR ""APC mutation*""[tiab])"
 gen,CDKN2A,uniprot,P42771,"cancer,suppressors",pubmed,"{""cromosoma"": ""9""}",,,CDKN2A[tiab]
 gen,VHL,uniprot,P40337,"cancer,suppressors",pubmed,"{""cromosoma"": ""3""}",,,VHL[tiab]
-gen,ATM,uniprot,Q13315,"cancer,suppressors",pubmed,"{""cromosoma"": ""11""}",,,ATM[tiab]
+gen,ATM,uniprot,Q13315,"cancer,suppressors",pubmed,"{""cromosoma"": ""11""}",,,"(""ataxia telangiectasia mutated""[tiab] OR ""ATM kinase""[tiab] OR ""ATM gene""[tiab] OR ""ATM mutation*""[tiab])"
 gen,MLH1,uniprot,P40692,"cancer,suppressors",pubmed,"{""cromosoma"": ""3""}",,,MLH1[tiab]
 gen,KRAS,uniprot,P01116,"cancer,oncogenes",pubmed,"{""cromosoma"": ""12""}",,,KRAS[tiab]
 gen,HRAS,uniprot,P01112,"cancer,oncogenes",pubmed,"{""cromosoma"": ""11""}",,,HRAS[tiab]
@@ -15,20 +15,20 @@ gen,NRAS,uniprot,P01111,"cancer,oncogenes",pubmed,"{""cromosoma"": ""1""}",,,NRA
 gen,BRAF,uniprot,P15056,"cancer,oncogenes",pubmed,"{""cromosoma"": ""7""}",,,BRAF[tiab]
 gen,PIK3CA,uniprot,P42336,"cancer,oncogenes",pubmed,"{""cromosoma"": ""3""}",,,PIK3CA[tiab]
 gen,EGFR,uniprot,P00533,"cancer,oncogenes",pubmed,"{""cromosoma"": ""7""}",,,EGFR[tiab]
-gen,ERBB2,uniprot,P04626,"cancer,oncogenes",pubmed,"{""cromosoma"": ""17""}",,,ERBB2[tiab]
-gen,MYC,uniprot,P01106,"cancer,oncogenes",pubmed,"{""cromosoma"": ""8""}",,,MYC[tiab]
+gen,ERBB2,uniprot,P04626,"cancer,oncogenes",pubmed,"{""cromosoma"": ""17""}",,,"(ERBB2[tiab] OR HER2[tiab] OR ""HER-2""[tiab])"
+gen,MYC,uniprot,P01106,"cancer,oncogenes",pubmed,"{""cromosoma"": ""8""}",,,"(MYC[tiab] OR ""c-Myc""[tiab])"
 gen,ABL1,uniprot,P00519,"cancer,oncogenes",pubmed,"{""cromosoma"": ""9""}",,,ABL1[tiab]
-gen,BCL2,uniprot,P10415,"cancer,oncogenes",pubmed,"{""cromosoma"": ""18""}",,,BCL2[tiab]
+gen,BCL2,uniprot,P10415,"cancer,oncogenes",pubmed,"{""cromosoma"": ""18""}",,,"(BCL2[tiab] OR ""Bcl-2""[tiab])"
 gen,CDK4,uniprot,P11802,"cancer,oncogenes",pubmed,"{""cromosoma"": ""12""}",,,CDK4[tiab]
-gen,SRC,uniprot,P12931,"cancer,oncogenes",pubmed,"{""cromosoma"": ""20""}",,,SRC[tiab]
+gen,SRC,uniprot,P12931,"cancer,oncogenes",pubmed,"{""cromosoma"": ""20""}",,,"(""c-Src""[tiab] OR ""Src kinase""[tiab] OR ""Src family""[tiab] OR ""Src inhibitor*""[tiab])"
 gen,AKT1,uniprot,P31749,"cancer,oncogenes",pubmed,"{""cromosoma"": ""14""}",,,AKT1[tiab]
 gen,MTOR,uniprot,P42345,"cancer,oncogenes",pubmed,"{""cromosoma"": ""1""}",,,MTOR[tiab]
 gen,CTNNB1,uniprot,P35222,"cancer,oncogenes",pubmed,"{""cromosoma"": ""3""}",,,CTNNB1[tiab]
 gen,IDH1,uniprot,O75874,"cancer,oncogenes",pubmed,"{""cromosoma"": ""2""}",,,IDH1[tiab]
-gen,ALK,uniprot,Q9UM73,"cancer,oncogenes",pubmed,"{""cromosoma"": ""2""}",,,ALK[tiab]
+gen,ALK,uniprot,Q9UM73,"cancer,oncogenes",pubmed,"{""cromosoma"": ""2""}",,,"(""anaplastic lymphoma kinase""[tiab] OR ""ALK kinase""[tiab] OR ""ALK-positive""[tiab] OR ""ALK inhibitor*""[tiab] OR ""ALK rearrangement*""[tiab])"
 gen,MDM2,uniprot,Q00987,"cancer,oncogenes",pubmed,"{""cromosoma"": ""12""}",,,MDM2[tiab]
-gen,CD274,uniprot,Q9NZQ7,"cancer,immunotherapy",pubmed,"{""cromosoma"": ""9""}",,,CD274[tiab]
-gen,PDCD1,uniprot,Q15116,"cancer,immunotherapy",pubmed,"{""cromosoma"": ""2""}",,,PDCD1[tiab]
+gen,CD274,uniprot,Q9NZQ7,"cancer,immunotherapy",pubmed,"{""cromosoma"": ""9""}",,,"(CD274[tiab] OR ""PD-L1""[tiab])"
+gen,PDCD1,uniprot,Q15116,"cancer,immunotherapy",pubmed,"{""cromosoma"": ""2""}",,,"(PDCD1[tiab] OR ""PD-1""[tiab])"
 tecnica,PCR,mesh,,,pubmed,,Polymerase Chain Reaction,Polymerase chain reaction,PCR[tiab]
 tecnica,Flow cytometry,mesh,,,pubmed,,Flow Cytometry,Flow cytometry,"""Flow cytometry""[tiab]"
 tecnica,Western blot,mesh,,,pubmed,,"Blotting, Western",Western blot,"""Western blot""[tiab]"
@@ -81,7 +81,7 @@ reactiu,Trypsin,wikidata,,,pubmed,,,Trypsin,Trypsin[tiab]
 reactiu,Ethidium bromide,wikidata,,,pubmed,,,Ethidium bromide,"""ethidium bromide""[tiab]"
 reactiu,Agarose,wikidata,,,pubmed,,,Agarose,Agarose[tiab]
 reactiu,Formaldehyde,wikidata,,,pubmed,,,Formaldehyde,Formaldehyde[tiab]
-reactiu,SDS,wikidata,,,pubmed,,,Sodium dodecyl sulfate,"""sodium dodecyl sulfate""[tiab]"
+reactiu,SDS,wikidata,,,pubmed,,,Sodium dodecyl sulfate,"(""sodium dodecyl sulfate""[tiab] OR ""SDS-PAGE""[tiab])"
 reactiu,PBS,wikidata,,,pubmed,,,Phosphate-buffered saline,"""phosphate buffered saline""[tiab]"
 reactiu,Tris,wikidata,,,pubmed,,,Tris,Tris[tiab]
 linia_cellular,HeLa,cellosaurus,,"cancer,cell-lines",pubmed,,,HeLa,"""HeLa""[tiab]"
@@ -122,17 +122,17 @@ molecula,Bevacizumab,wikidata,,"cancer,antineoplastics",pubmed,,,Bevacizumab,Bev
 gen,STAT3,uniprot,P40763,"cancer,oncogenes",pubmed,"{""cromosoma"": ""17""}",,,STAT3[tiab]
 gen,JAK2,uniprot,O60674,"cancer,oncogenes",pubmed,"{""cromosoma"": ""9""}",,,JAK2[tiab]
 gen,NOTCH1,uniprot,P46531,"cancer,oncogenes",pubmed,"{""cromosoma"": ""9""}",,,NOTCH1[tiab]
-gen,MET,uniprot,P08581,"cancer,oncogenes",pubmed,"{""cromosoma"": ""7""}",,,MET[tiab]
+gen,MET,uniprot,P08581,"cancer,oncogenes",pubmed,"{""cromosoma"": ""7""}",,,"(""c-Met""[tiab] OR ""MET proto-oncogene""[tiab] OR ""hepatocyte growth factor receptor""[tiab] OR ""MET receptor""[tiab])"
 gen,FGFR1,uniprot,P11362,"cancer,oncogenes",pubmed,"{""cromosoma"": ""8""}",,,FGFR1[tiab]
-gen,RET,uniprot,P07949,"cancer,oncogenes",pubmed,"{""cromosoma"": ""10""}",,,RET[tiab]
-gen,KIT,uniprot,P10721,"cancer,oncogenes",pubmed,"{""cromosoma"": ""4""}",,,KIT[tiab]
+gen,RET,uniprot,P07949,"cancer,oncogenes",pubmed,"{""cromosoma"": ""10""}",,,"(""RET proto-oncogene""[tiab] OR ""RET kinase""[tiab] OR ""RET fusion*""[tiab] OR ""RET mutation*""[tiab] OR ""RET inhibitor*""[tiab])"
+gen,KIT,uniprot,P10721,"cancer,oncogenes",pubmed,"{""cromosoma"": ""4""}",,,"(""c-Kit""[tiab] OR ""KIT receptor""[tiab] OR CD117[tiab] OR ""KIT mutation*""[tiab] OR ""KIT gene""[tiab])"
 gen,CDK2,uniprot,P24941,"cancer,oncogenes",pubmed,"{""cromosoma"": ""12""}",,,CDK2[tiab]
 gen,CCND1,uniprot,P24385,"cancer,oncogenes",pubmed,"{""cromosoma"": ""11""}",,,CCND1[tiab]
-gen,VEGFA,uniprot,P15692,"cancer,oncogenes",pubmed,"{""cromosoma"": ""6""}",,,VEGFA[tiab]
-gen,TERT,uniprot,O14746,"cancer,oncogenes",pubmed,"{""cromosoma"": ""5""}",,,TERT[tiab]
-gen,HIF1A,uniprot,Q16665,"cancer,oncogenes",pubmed,"{""cromosoma"": ""14""}",,,HIF1A[tiab]
+gen,VEGFA,uniprot,P15692,"cancer,oncogenes",pubmed,"{""cromosoma"": ""6""}",,,(VEGFA[tiab] OR VEGF[tiab])
+gen,TERT,uniprot,O14746,"cancer,oncogenes",pubmed,"{""cromosoma"": ""5""}",,,(TERT[tiab] OR telomerase[tiab])
+gen,HIF1A,uniprot,Q16665,"cancer,oncogenes",pubmed,"{""cromosoma"": ""14""}",,,"(HIF1A[tiab] OR ""HIF-1""[tiab] OR ""hypoxia-inducible factor 1""[tiab])"
 gen,BAX,uniprot,Q07812,"cancer,apoptosis",pubmed,"{""cromosoma"": ""19""}",,,BAX[tiab]
-gen,CASP3,uniprot,P42574,"cancer,apoptosis",pubmed,"{""cromosoma"": ""4""}",,,CASP3[tiab]
+gen,CASP3,uniprot,P42574,"cancer,apoptosis",pubmed,"{""cromosoma"": ""4""}",,,"(CASP3[tiab] OR ""caspase-3""[tiab])"
 gen,SMAD4,uniprot,Q13485,"cancer,suppressors",pubmed,"{""cromosoma"": ""18""}",,,SMAD4[tiab]
 gen,STK11,uniprot,Q15831,"cancer,suppressors",pubmed,"{""cromosoma"": ""19""}",,,STK11[tiab]
 gen,NF2,uniprot,P35240,"cancer,suppressors",pubmed,"{""cromosoma"": ""22""}",,,NF2[tiab]
@@ -155,14 +155,14 @@ cientific,Alfred Knudson,wikidata,,cancer,wiki_langs,,,Alfred G. Knudson,
 cientific,Janet Rowley,wikidata,,cancer,wiki_langs,,,Janet Rowley,
 cientific,Brian Druker,wikidata,,cancer,wiki_langs,,,Brian Druker,
 tecnica,Immunoprecipitation,mesh,,,pubmed,,Immunoprecipitation,Immunoprecipitation,"""Immunoprecipitation""[tiab]"
-tecnica,ChIP,mesh,,,pubmed,,Chromatin Immunoprecipitation,Chromatin immunoprecipitation,ChIP[tiab]
-tecnica,FISH,mesh,,,pubmed,,"In Situ Hybridization, Fluorescence",Fluorescence in situ hybridization,FISH[tiab]
+tecnica,ChIP,mesh,,,pubmed,,Chromatin Immunoprecipitation,Chromatin immunoprecipitation,"(""chromatin immunoprecipitation""[tiab] OR ""ChIP-seq""[tiab] OR ""ChIP assay""[tiab])"
+tecnica,FISH,mesh,,,pubmed,,"In Situ Hybridization, Fluorescence",Fluorescence in situ hybridization,"(""fluorescence in situ hybridization""[tiab] OR ""FISH analysis""[tiab] OR ""FISH assay""[tiab])"
 tecnica,DNA microarray,mesh,,,pubmed,,Oligonucleotide Array Sequence Analysis,DNA microarray,"""DNA microarray""[tiab]"
 tecnica,RNA-seq,mesh,,,pubmed,,"Sequence Analysis, RNA",RNA-Seq,RNA-seq[tiab]
 tecnica,Transfection,mesh,,,pubmed,,Transfection,Transfection,"""Transfection""[tiab]"
 tecnica,Molecular cloning,mesh,,,pubmed,,"Cloning, Molecular",Molecular cloning,"""Molecular cloning""[tiab]"
 tecnica,MRI,mesh,,,pubmed,,Magnetic Resonance Imaging,Magnetic resonance imaging,MRI[tiab]
-tecnica,PET,mesh,,,pubmed,,Positron-Emission Tomography,Positron emission tomography,PET[tiab]
+tecnica,PET,mesh,,,pubmed,,Positron-Emission Tomography,Positron emission tomography,"(""positron emission tomography""[tiab] OR ""PET/CT""[tiab] OR ""PET imaging""[tiab])"
 tecnica,X-ray crystallography,mesh,,,pubmed,,"Crystallography, X-Ray",X-ray crystallography,"""X-ray crystallography""[tiab]"
 tecnica,Cryo-EM,mesh,,,pubmed,,Cryoelectron Microscopy,Cryogenic electron microscopy,Cryo-EM[tiab]
 tecnica,Karyotyping,mesh,,,pubmed,,Karyotyping,Karyotype,"""Karyotyping""[tiab]"

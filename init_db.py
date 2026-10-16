@@ -5,6 +5,7 @@ from pathlib import Path
 ARREL = Path(__file__).parent
 # (percentil mínim, raresa): el 50% més baix és comú, el 1% més alt llegendari
 LLINDARS = [(0.99, "llegendaria"), (0.95, "epica"), (0.80, "rara"), (0.50, "poc_comuna"), (0.0, "comuna")]
+MIN_CARTES_LLEGENDARIA = 20  # categories amb tantes cartes o més: la més popular és llegendària (amb pocs milers de cartes el 1% ja ho fa sol)
 NOUS = ("etiqueta_font", "wiki_titol", "terme_pubmed")
 
 def assigna_raresa(con):
@@ -16,6 +17,8 @@ def assigna_raresa(con):
             pct = i / n if n > 1 else 0.0
             raresa = next(r for p, r in LLINDARS if pct >= p)
             con.execute("UPDATE carta SET raresa=? WHERE id=?", (raresa, cid))
+        if n >= MIN_CARTES_LLEGENDARIA:  # la més popular (l'última de l'ordre) és llegendària
+            con.execute("UPDATE carta SET raresa='llegendaria' WHERE id=?", (files[-1][0],))
 
 def migra(con):
     """Afegeix les columnes noves a una base creada amb l'esquema antic."""
@@ -30,13 +33,14 @@ def main(db=ARREL / "db" / "cartes.sqlite"):
     migra(con)
     with open(ARREL / "pilot" / "pilot.csv", encoding="utf-8", newline="") as f:
         for r in csv.DictReader(f):
-            vell = con.execute("SELECT id, popularitat_tipus FROM carta WHERE categoria=? AND nom=?",
+            vell = con.execute("SELECT id, popularitat_tipus, terme_pubmed FROM carta WHERE categoria=? AND nom=?",
                                (r["categoria"], r["nom"])).fetchone()
             if vell:  # font_id pot ser NULL i UNIQUE no ho detecta; actualitza només els camps de configuració
                 con.execute("UPDATE carta SET coleccions=?, popularitat_tipus=?, etiqueta_font=?, wiki_titol=?, terme_pubmed=?,"
-                            " popularitat=CASE WHEN popularitat_tipus IS ? THEN popularitat ELSE NULL END WHERE id=?",
+                            " popularitat=CASE WHEN popularitat_tipus IS ? AND terme_pubmed IS ? THEN popularitat ELSE NULL END WHERE id=?",
                             (r["coleccions"] or None, r["popularitat_tipus"], r["etiqueta_font"] or None,
-                             r["wiki_titol"] or None, r["terme_pubmed"] or None, r["popularitat_tipus"], vell[0]))
+                             r["wiki_titol"] or None, r["terme_pubmed"] or None, r["popularitat_tipus"],
+                             r["terme_pubmed"] or None, vell[0]))
                 continue
             con.execute(
                 "INSERT INTO carta (categoria,nom,font,font_id,coleccions,popularitat_tipus,estadistiques,etiqueta_font,wiki_titol,terme_pubmed)"
