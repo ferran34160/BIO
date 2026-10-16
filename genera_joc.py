@@ -9,7 +9,8 @@ ARREL = Path(__file__).parent
 
 # Col·leccions: etiqueta de la BD -> nom que es mostra
 NOMS_COLECCIO = {"cancer": "Cancer", "oncogenes": "Oncogenes", "suppressors": "Tumor suppressors",
-                 "nobel": "Nobel laureates", "cell-lines": "Cell lines", "immunotherapy": "Immunotherapy targets"}
+                 "nobel": "Nobel laureates", "cell-lines": "Cell lines", "immunotherapy": "Immunotherapy targets",
+                 "antineoplastics": "Cancer drugs", "apoptosis": "Apoptosis genes"}
 
 # Protocols: es completen tenint (no gastant) totes les cartes. Fets a mà; cal revisar-los amb criteri científic.
 PROTOCOLS = [
@@ -19,6 +20,9 @@ PROTOCOLS = [
     ("Find a protein", "Detect one protein in a lysate.", ["Western blot", "SDS", "Gel electrophoresis", "PBS"]),
     ("Image the cell", "Look at stained cells.", ["Microscope", "Fluorescence microscopy", "Immunofluorescence", "Formaldehyde"]),
     ("Sort cells", "Count and sort cells by markers.", ["Flow cytometry", "Hemocytometer", "Cell culture"]),
+    ("Stain a tissue", "Fix and stain a tissue section for the microscope.", ["Formaldehyde", "Hematoxylin", "Eosin", "Microscope"]),
+    ("Clone a gene", "Insert a gene into a plasmid and select the bacteria.", ["Molecular cloning", "PCR", "Transfection", "Ampicillin", "Petri dish"]),
+    ("Test a drug", "Treat cultured cancer cells and count the survivors.", ["Cell culture", "Cisplatin", "MCF-7", "Hemocytometer"]),
 ]
 
 # Mateixa economia que el joc d'esports (android/.../Motor.kt): destruir 5/15/50/200/1000, fabricar x5,
@@ -50,7 +54,9 @@ def construeix_dades():
                             "ids": ids, "premi": sum(VALOR_RECICLAR[by_id[i]] for i in ids) // 2 + 10})
     for nom, desc, noms in PROTOCOLS:
         faltes = [n for n in noms if n not in per_nom]
-        assert not faltes, f"Protocol «{nom}»: no existeixen les cartes {faltes}"
+        if faltes:  # protocol que depèn de cartes que encara no són a la base de dades
+            print(f"  (protocol «{nom}» omès: falten {faltes})")
+            continue
         misions.append({"id": f"proto:{nom}", "tipus": "protocol", "nom": nom, "desc": desc,
                         "ids": [per_nom[n] for n in noms], "premi": 25})
     return cartes, misions

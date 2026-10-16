@@ -99,3 +99,103 @@ concepte,Oncogenes,mesh,,cancer,pubmed,,Oncogenes,Oncogene,"""Oncogenes""[tiab]"
 concepte,Tumor suppressor genes,mesh,,cancer,pubmed,,"Genes, Tumor Suppressor",Tumor suppressor gene,"""Tumor suppressor genes""[tiab]"
 concepte,Carcinogenesis,mesh,,cancer,pubmed,,Carcinogenesis,Carcinogenesis,"""Carcinogenesis""[tiab]"
 concepte,Immunotherapy,mesh,,cancer,pubmed,,Immunotherapy,Cancer immunotherapy,"""Immunotherapy""[tiab]"
+molecula,Paclitaxel,wikidata,,"cancer,antineoplastics",pubmed,,,Paclitaxel,Paclitaxel[tiab]
+molecula,Cisplatin,wikidata,,"cancer,antineoplastics",pubmed,,,Cisplatin,Cisplatin[tiab]
+molecula,Carboplatin,wikidata,,"cancer,antineoplastics",pubmed,,,Carboplatin,Carboplatin[tiab]
+molecula,Doxorubicin,wikidata,,"cancer,antineoplastics",pubmed,,,Doxorubicin,Doxorubicin[tiab]
+molecula,Imatinib,wikidata,,"cancer,antineoplastics",pubmed,,,Imatinib,Imatinib[tiab]
+molecula,Tamoxifen,wikidata,,"cancer,antineoplastics",pubmed,,,Tamoxifen,Tamoxifen[tiab]
+molecula,Methotrexate,wikidata,,"cancer,antineoplastics",pubmed,,,Methotrexate,Methotrexate[tiab]
+molecula,Fluorouracil,wikidata,,"cancer,antineoplastics",pubmed,,,Fluorouracil,Fluorouracil[tiab]
+molecula,Cyclophosphamide,wikidata,,"cancer,antineoplastics",pubmed,,,Cyclophosphamide,Cyclophosphamide[tiab]
+molecula,Gemcitabine,wikidata,,"cancer,antineoplastics",pubmed,,,Gemcitabine,Gemcitabine[tiab]
+molecula,Etoposide,wikidata,,"cancer,antineoplastics",pubmed,,,Etoposide,Etoposide[tiab]
+molecula,Vincristine,wikidata,,"cancer,antineoplastics",pubmed,,,Vincristine,Vincristine[tiab]
+molecula,Erlotinib,wikidata,,"cancer,antineoplastics",pubmed,,,Erlotinib,Erlotinib[tiab]
+molecula,Gefitinib,wikidata,,"cancer,antineoplastics",pubmed,,,Gefitinib,Gefitinib[tiab]
+molecula,Temozolomide,wikidata,,"cancer,antineoplastics",pubmed,,,Temozolomide,Temozolomide[tiab]
+molecula,Olaparib,wikidata,,"cancer,antineoplastics",pubmed,,,Olaparib,Olaparib[tiab]
+molecula,Vemurafenib,wikidata,,"cancer,antineoplastics",pubmed,,,Vemurafenib,Vemurafenib[tiab]
+molecula,Pembrolizumab,wikidata,,"cancer,antineoplastics",pubmed,,,Pembrolizumab,Pembrolizumab[tiab]
+molecula,Trastuzumab,wikidata,,"cancer,antineoplastics",pubmed,,,Trastuzumab,Trastuzumab[tiab]
+molecula,Bevacizumab,wikidata,,"cancer,antineoplastics",pubmed,,,Bevacizumab,Bevacizumab[tiab]
+gen,STAT3,uniprot,P40763,"cancer,oncogenes",pubmed,"{""cromosoma"": ""17""}",,,STAT3[tiab]
+gen,JAK2,uniprot,O60674,"cancer,oncogenes",pubmed,"{""cromosoma"": ""9""}",,,JAK2[tiab]
+gen,NOTCH1,uniprot,P46531,"cancer,oncogenes",pubmed,"{""cromosoma"": ""9""}",,,NOTCH1[tiab]
+gen,MET,uniprot,P08581,"cancer,oncogenes",pubmed,"{""cromosoma"": ""7""}",,,MET[tiab]
+gen,FGFR1,uniprot,P11362,"cancer,oncogenes",pubmed,"{""cromosoma"": ""8""}",,,FGFR1[tiab]
+gen,RET,uniprot,P07949,"cancer,oncogenes",pubmed,"{""cromosoma"": ""10""}",,,RET[tiab]
+gen,KIT,uniprot,P10721,"cancer,oncogenes",pubmed,"{""cromosoma"": ""4""}",,,KIT[tiab]
+gen,CDK2,uniprot,P24941,"cancer,oncogenes",pubmed,"{""cromosoma"": ""12""}",,,CDK2[tiab]
+gen,CCND1,uniprot,P24385,"cancer,oncogenes",pubmed,"{""cromosoma"": ""11""}",,,CCND1[tiab]
+gen,VEGFA,uniprot,P15692,"cancer,oncogenes",pubmed,"{""cromosoma"": ""6""}",,,VEGFA[tiab]
+gen,TERT,uniprot,O14746,"cancer,oncogenes",pubmed,"{""cromosoma"": ""5""}",,,TERT[tiab]
+gen,HIF1A,uniprot,Q16665,"cancer,oncogenes",pubmed,"{""cromosoma"": ""14""}",,,HIF1A[tiab]
+gen,BAX,uniprot,Q07812,"cancer,apoptosis",pubmed,"{""cromosoma"": ""19""}",,,BAX[tiab]
+gen,CASP3,uniprot,P42574,"cancer,apoptosis",pubmed,"{""cromosoma"": ""4""}",,,CASP3[tiab]
+gen,SMAD4,uniprot,Q13485,"cancer,suppressors",pubmed,"{""cromosoma"": ""18""}",,,SMAD4[tiab]
+gen,STK11,uniprot,Q15831,"cancer,suppressors",pubmed,"{""cromosoma"": ""19""}",,,STK11[tiab]
+gen,NF2,uniprot,P35240,"cancer,suppressors",pubmed,"{""cromosoma"": ""22""}",,,NF2[tiab]
+gen,WT1,uniprot,P19544,"cancer,suppressors",pubmed,"{""cromosoma"": ""11""}",,,WT1[tiab]
+gen,MSH2,uniprot,P43246,"cancer,suppressors",pubmed,"{""cromosoma"": ""2""}",,,MSH2[tiab]
+gen,CHEK2,uniprot,O96017,"cancer,suppressors",pubmed,"{""cromosoma"": ""22""}",,,CHEK2[tiab]
+cientific,Otto Warburg,wikidata,,"cancer,nobel",wiki_langs,,,Otto Heinrich Warburg,
+cientific,Renato Dulbecco,wikidata,,"cancer,nobel",wiki_langs,,,Renato Dulbecco,
+cientific,David Baltimore,wikidata,,"cancer,nobel",wiki_langs,,,David Baltimore,
+cientific,Howard Temin,wikidata,,"cancer,nobel",wiki_langs,,,Howard Temin,
+cientific,Sidney Farber,wikidata,,cancer,wiki_langs,,,Sidney Farber,
+cientific,Judah Folkman,wikidata,,cancer,wiki_langs,,,Judah Folkman,
+cientific,Mary-Claire King,wikidata,,cancer,wiki_langs,,,Mary-Claire King,
+cientific,Leland Hartwell,wikidata,,nobel,wiki_langs,,,Leland H. Hartwell,
+cientific,Paul Nurse,wikidata,,nobel,wiki_langs,,,Paul Nurse,
+cientific,Tim Hunt,wikidata,,nobel,wiki_langs,,,Tim Hunt,
+cientific,Charles Huggins,wikidata,,"cancer,nobel",wiki_langs,,,Charles B. Huggins,
+cientific,Gertrude Elion,wikidata,,"cancer,nobel",wiki_langs,,,Gertrude B. Elion,
+cientific,Alfred Knudson,wikidata,,cancer,wiki_langs,,,Alfred G. Knudson,
+cientific,Janet Rowley,wikidata,,cancer,wiki_langs,,,Janet Rowley,
+cientific,Brian Druker,wikidata,,cancer,wiki_langs,,,Brian Druker,
+tecnica,Immunoprecipitation,mesh,,,pubmed,,Immunoprecipitation,Immunoprecipitation,"""Immunoprecipitation""[tiab]"
+tecnica,ChIP,mesh,,,pubmed,,Chromatin Immunoprecipitation,Chromatin immunoprecipitation,ChIP[tiab]
+tecnica,FISH,mesh,,,pubmed,,"In Situ Hybridization, Fluorescence",Fluorescence in situ hybridization,FISH[tiab]
+tecnica,DNA microarray,mesh,,,pubmed,,Oligonucleotide Array Sequence Analysis,DNA microarray,"""DNA microarray""[tiab]"
+tecnica,RNA-seq,mesh,,,pubmed,,"Sequence Analysis, RNA",RNA-Seq,RNA-seq[tiab]
+tecnica,Transfection,mesh,,,pubmed,,Transfection,Transfection,"""Transfection""[tiab]"
+tecnica,Molecular cloning,mesh,,,pubmed,,"Cloning, Molecular",Molecular cloning,"""Molecular cloning""[tiab]"
+tecnica,MRI,mesh,,,pubmed,,Magnetic Resonance Imaging,Magnetic resonance imaging,MRI[tiab]
+tecnica,PET,mesh,,,pubmed,,Positron-Emission Tomography,Positron emission tomography,PET[tiab]
+tecnica,X-ray crystallography,mesh,,,pubmed,,"Crystallography, X-Ray",X-ray crystallography,"""X-ray crystallography""[tiab]"
+tecnica,Cryo-EM,mesh,,,pubmed,,Cryoelectron Microscopy,Cryogenic electron microscopy,Cryo-EM[tiab]
+tecnica,Karyotyping,mesh,,,pubmed,,Karyotyping,Karyotype,"""Karyotyping""[tiab]"
+aparell,Fume hood,wikidata,,,pubmed,,,Fume hood,"""Fume hood""[tiab]"
+aparell,Vortex mixer,wikidata,,,pubmed,,,Vortex mixer,"""Vortex mixer""[tiab]"
+aparell,pH meter,wikidata,,,pubmed,,,PH meter,"""pH meter""[tiab]"
+aparell,Bunsen burner,wikidata,,,pubmed,,,Bunsen burner,"""Bunsen burner""[tiab]"
+aparell,Petri dish,wikidata,,,pubmed,,,Petri dish,"""Petri dish""[tiab]"
+aparell,Erlenmeyer flask,wikidata,,,pubmed,,,Erlenmeyer flask,"""Erlenmeyer flask""[tiab]"
+aparell,Scanning electron microscope,wikidata,,,pubmed,,,Scanning electron microscope,"""Scanning electron microscope""[tiab]"
+aparell,Ultracentrifuge,wikidata,,,pubmed,,,Ultracentrifuge,"""Ultracentrifuge""[tiab]"
+aparell,Scalpel,wikidata,,,pubmed,,,Scalpel,"""Scalpel""[tiab]"
+aparell,Syringe,wikidata,,,pubmed,,,Syringe,"""Syringe""[tiab]"
+reactiu,FBS,wikidata,,,pubmed,,,Fetal bovine serum,"""fetal bovine serum""[tiab]"
+reactiu,DMEM,wikidata,,,pubmed,,,Dulbecco's modified Eagle medium,DMEM[tiab]
+reactiu,BSA,wikidata,,,pubmed,,,Bovine serum albumin,"""bovine serum albumin""[tiab]"
+reactiu,Hematoxylin,wikidata,,,pubmed,,,Hematoxylin,Hematoxylin[tiab]
+reactiu,Eosin,wikidata,,,pubmed,,,Eosin,Eosin[tiab]
+reactiu,DAPI,wikidata,,,pubmed,,,DAPI,DAPI[tiab]
+reactiu,EDTA,wikidata,,,pubmed,,,Ethylenediaminetetraacetic acid,EDTA[tiab]
+reactiu,Ampicillin,wikidata,,,pubmed,,,Ampicillin,Ampicillin[tiab]
+linia_cellular,PC-3,cellosaurus,,"cancer,cell-lines",pubmed,,,PC-3,"""PC-3""[tiab]"
+linia_cellular,LNCaP,cellosaurus,,"cancer,cell-lines",pubmed,,,LNCaP,"""LNCaP""[tiab]"
+linia_cellular,MDA-MB-231,cellosaurus,,"cancer,cell-lines",pubmed,,,MDA-MB-231,"""MDA-MB-231""[tiab]"
+linia_cellular,U-87 MG,cellosaurus,,"cancer,cell-lines",pubmed,,,U-87 MG,"""U-87 MG""[tiab]"
+linia_cellular,Caco-2,cellosaurus,,"cancer,cell-lines",pubmed,,,Caco-2,"""Caco-2""[tiab]"
+linia_cellular,THP-1,cellosaurus,,"cancer,cell-lines",pubmed,,,THP-1,"""THP-1""[tiab]"
+concepte,Cell cycle,mesh,,cancer,pubmed,,Cell Cycle,Cell cycle,"""Cell cycle""[tiab]"
+concepte,Mutation,mesh,,cancer,pubmed,,Mutation,Mutation,"""Mutation""[tiab]"
+concepte,DNA repair,mesh,,cancer,pubmed,,DNA Repair,DNA repair,"""DNA repair""[tiab]"
+concepte,Tumor microenvironment,mesh,,cancer,pubmed,,Tumor Microenvironment,Tumor microenvironment,"""Tumor microenvironment""[tiab]"
+concepte,Neoplastic transformation,mesh,,cancer,pubmed,,"Cell Transformation, Neoplastic",Malignant transformation,"""Neoplastic transformation""[tiab]"
+concepte,Tumor biomarkers,mesh,,cancer,pubmed,,"Biomarkers, Tumor",Tumor marker,"""Tumor biomarkers""[tiab]"
+concepte,Drug resistance,mesh,,cancer,pubmed,,"Drug Resistance, Neoplasm",Drug resistance,"""Drug resistance""[tiab]"
+concepte,Angiogenesis,mesh,,cancer,pubmed,,"Neovascularization, Pathologic",Angiogenesis,"""Angiogenesis""[tiab]"
+concepte,Epigenetics,mesh,,cancer,pubmed,,"Epigenesis, Genetic",Epigenetics,"""Epigenetics""[tiab]"
