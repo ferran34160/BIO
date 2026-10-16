@@ -4,11 +4,11 @@ from pathlib import Path
 
 ARREL = Path(__file__).parent
 COLORS = {"comuna": "#8a8f98", "poc_comuna": "#3f9b5c", "rara": "#2f7fd1", "epica": "#8e4fd1", "llegendaria": "#e0a21a"}
-ETIQ_RARESA = {"comuna": "Comuna", "poc_comuna": "Poc comuna", "rara": "Rara", "epica": "Èpica", "llegendaria": "Llegendària"}
-ETIQ_CAT = {"gen": "Gen / proteïna", "molecula": "Molècula", "cientific": "Científic", "concepte": "Concepte",
-            "tecnica": "Tècnica", "aparell": "Aparell", "reactiu": "Reactiu", "linia_cellular": "Línia cel·lular",
-            "descobriment": "Descobriment"}
-ETIQ_STAT = {"cromosoma": "Cromosoma", "longitud_aa": "Longitud (aa)"}
+ETIQ_RARESA = {"comuna": "Common", "poc_comuna": "Uncommon", "rara": "Rare", "epica": "Epic", "llegendaria": "Legendary"}
+ETIQ_CAT = {"gen": "Gene / protein", "molecula": "Molecule", "cientific": "Scientist", "concepte": "Concept",
+            "tecnica": "Technique", "aparell": "Instrument", "reactiu": "Reagent", "linia_cellular": "Cell line",
+            "descobriment": "Discovery"}
+ETIQ_STAT = {"cromosoma": "Chromosome", "longitud_aa": "Length (aa)"}
 
 def carta_html(c):
     e = html.escape
@@ -20,8 +20,8 @@ def carta_html(c):
         img = f'<div class="sense-img">{e(ETIQ_CAT[c["categoria"]])}</div>'
     stats = "".join(f'<li><span>{e(ETIQ_STAT.get(k, k))}</span><b>{e(str(v))}</b></li>'
                     for k, v in json.loads(c["estadistiques"] or "{}").items())
-    defin = (f'<p class="def">{e(c["definicio"])}</p><p class="font">Font: {e(c["definicio_font"] or "")}</p>'
-             if c["definicio"] else '<p class="def buit">Definició pendent</p>')
+    defin = (f'<p class="def">{e(c["definicio"])}</p><p class="font">Source: {e(c["definicio_font"] or "")}</p>'
+             if c["definicio"] else '<p class="def buit">Definition pending</p>')
     return (f'<article class="carta" style="--r:{color}"><header><h2>{e(c["nom"])}</h2>'
             f'<span>{e(ETIQ_RARESA.get(c["raresa"], ""))}</span></header>'
             f'<div class="img">{img}</div><div class="cat">{e(ETIQ_CAT[c["categoria"]])}</div>'
@@ -44,12 +44,12 @@ def main():
     con = sqlite3.connect(ARREL / "db" / "cartes.sqlite")
     con.row_factory = sqlite3.Row
     cartes = con.execute("SELECT * FROM carta ORDER BY categoria, nom").fetchall()
-    pagina = (f'<!doctype html><html lang="ca"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">'
-              f'<title>Àlbum BIO</title><style>{CSS}</style><h1>Àlbum ({len(cartes)} cartes)</h1>'
+    pagina = (f'<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">'
+              f'<title>BIO Album</title><style>{CSS}</style><h1>Album ({len(cartes)} cards)</h1>'
               f'<div class="grid">{"".join(carta_html(c) for c in cartes)}</div></html>')
     (ARREL / "web").mkdir(exist_ok=True)
     (ARREL / "web" / "index.html").write_text(pagina, encoding="utf-8")
-    print(f"web/index.html generat amb {len(cartes)} cartes")
+    print(f"web/index.html generated with {len(cartes)} cards")
 
 if __name__ == "__main__":
     main()
