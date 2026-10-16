@@ -115,28 +115,49 @@ def popularitat(carta, ua):
         {"db": "pubmed", "term": terme, "retmax": 0, "retmode": "json", "tool": "BIO-cartes"}), ua)
     return {"popularitat": int(d["esearchresult"]["count"])}
 
-def imatge(carta, ua):
-    titol = carta["wiki_titol"] or carta["nom"]
-    w = get_json("https://en.wikipedia.org/w/api.php?" + urllib.parse.urlencode(
-        {"action": "query", "prop": "pageimages", "piprop": "original|name", "titles": titol,
-         "redirects": 1, "format": "json"}), ua)
-    pag = next(iter(w["query"]["pages"].values()))
-    if "pageimage" not in pag:
-        return {}
+def fitxer_commons(nom_fitxer, ua):
+    """Dades d'un fitxer de Commons si té llicència lliure; si no, {} i un avís amb el motiu."""
     c = get_json("https://commons.wikimedia.org/w/api.php?" + urllib.parse.urlencode(
         {"action": "query", "prop": "imageinfo", "iiprop": "url|extmetadata", "iiurlwidth": 600,
-         "titles": "File:" + pag["pageimage"], "format": "json"}), ua)
+         "titles": "File:" + nom_fitxer, "format": "json"}), ua)
     pag_img = next(iter(c["query"]["pages"].values()))
-    if "imageinfo" not in pag_img:  # fitxer que no és a Commons (p. ex. imatge local de Wikipedia amb "fair use")
+    if "imageinfo" not in pag_img:  # fitxer local de Wikipedia (p. ex. "fair use"): no és a Commons
+        print(f"    imatge «{nom_fitxer}»: no és a Commons")
         return {}
     info = pag_img["imageinfo"][0]
     meta = info["extmetadata"]
     llic = meta.get("LicenseShortName", {}).get("value", "")
     if not LLICENCIES_LLIURES.match(llic):
+        print(f"    imatge «{nom_fitxer}»: llicència no lliure ({llic or 'sense llicència'})")
         return {}
     autor = html.unescape(re.sub(r"<[^>]+>", "", meta.get("Artist", {}).get("value", ""))).strip()
     return {"imatge_url": info.get("thumburl") or info["url"], "imatge_autor": autor or "desconegut",
             "imatge_llicencia": llic}
+
+def imatge(carta, ua):
+    """1r la imatge principal de l'article de Wikipedia; si no és lliure, la imatge P18 de Wikidata (sempre a Commons)."""
+    titol = carta["wiki_titol"] or carta["nom"]
+    w = get_json("https://en.wikipedia.org/w/api.php?" + urllib.parse.urlencode(
+        {"action": "query", "prop": "pageimages", "piprop": "original|name", "titles": titol,
+         "redirects": 1, "format": "json"}), ua)
+    pag = next(iter(w["query"]["pages"].values()))
+    if "pageimage" in pag:
+        r = fitxer_commons(pag["pageimage"], ua)
+        if r:
+            return r
+    else:
+        print(f"    «{titol}»: l'article no té imatge principal")
+    wd = get_json("https://www.wikidata.org/w/api.php?" + urllib.parse.urlencode(
+        {"action": "wbgetentities", "sites": "enwiki", "titles": titol, "props": "claims",
+         "format": "json"}), ua)
+    for ent in wd.get("entities", {}).values():
+        for claim in ent.get("claims", {}).get("P18", []):
+            nom = claim.get("mainsnak", {}).get("datavalue", {}).get("value")
+            if nom and nom != pag.get("pageimage"):
+                r = fitxer_commons(nom, ua)
+                if r:
+                    return r
+    return {}
 
 def main():
     ap = argparse.ArgumentParser()
