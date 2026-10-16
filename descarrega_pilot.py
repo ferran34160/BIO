@@ -6,7 +6,7 @@ Només biblioteca estàndard. Ús:  python descarrega_pilot.py --contacte correu
   Wikipedia/Commons -> imatge amb autor i llicència (només llicències lliures)
 Les cartes queden amb verificada=0: cal revisar-les abans de donar-les per bones.
 """
-import argparse, html, json, re, sqlite3, time, urllib.parse, urllib.request
+import argparse, html, json, re, sqlite3, time, urllib.error, urllib.parse, urllib.request
 from pathlib import Path
 
 DB = Path(__file__).parent / "db" / "cartes.sqlite"
@@ -17,12 +17,20 @@ WIKI_TITLE = {"PCR": "Polymerase chain reaction", "Citometria de flux": "Flow cy
               "DMSO": "Dimethyl sulfoxide", "Henrietta Lacks": "Henrietta Lacks"}
 LLICENCIES_LLIURES = re.compile(r"^(CC[ -]BY|CC0|Public domain|PD)", re.I)
 
-def get_json(url, ua, pausa=0.3):
+def get_json(url, ua, pausa=1.0):
     req = urllib.request.Request(url, headers={"User-Agent": ua, "Accept": "application/json"})
-    with urllib.request.urlopen(req, timeout=60) as r:
-        dades = json.load(r)
-    time.sleep(pausa)
-    return dades
+    for intent in range(5):
+        try:
+            with urllib.request.urlopen(req, timeout=60) as r:
+                dades = json.load(r)
+            time.sleep(pausa)
+            return dades
+        except urllib.error.HTTPError as e:
+            if e.code != 429 or intent == 4:
+                raise
+            espera = int(e.headers.get("Retry-After") or 0) or 10 * (intent + 1)
+            print(f"    429, espero {espera} s...")
+            time.sleep(espera)
 
 def uniprot(carta, ua):
     d = get_json(f"https://rest.uniprot.org/uniprotkb/{carta['font_id']}.json", ua)
@@ -35,14 +43,20 @@ def uniprot(carta, ua):
 
 def mesh(carta, ua):
     label = MESH_LABEL.get(carta["nom"], carta["nom"])
-    q = ('PREFIX meshv: <http://id.nlm.nih.gov/mesh/vocab#> PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> '
-         'SELECT ?d ?note WHERE { ?d a meshv:Descriptor ; rdfs:label ?l ; meshv:preferredConcept ?c . '
-         f'?c meshv:scopeNote ?note . FILTER(str(?l) = "{label}") }} LIMIT 1')
-    url = "https://id.nlm.nih.gov/mesh/sparql?" + urllib.parse.urlencode({"query": q, "format": "JSON"})
-    b = get_json(url, ua)["results"]["bindings"]
-    if not b:
+    trobats = get_json("https://id.nlm.nih.gov/mesh/lookup/descriptor?" + urllib.parse.urlencode(
+        {"label": label, "match": "exact", "limit": 1}), ua)
+    if not trobats:
+        print(f"    MeSH: cap descriptor amb l'etiqueta exacta «{label}»")
         return {}
-    return {"font_id": b[0]["d"]["value"].rsplit("/", 1)[-1], "definicio": b[0]["note"]["value"],
+    uri = trobats[0]["resource"]
+    q = ('PREFIX meshv: <http://id.nlm.nih.gov/mesh/vocab#> '
+         f'SELECT ?note WHERE {{ <{uri}> meshv:preferredConcept ?c . ?c meshv:scopeNote ?note }} LIMIT 1')
+    b = get_json("https://id.nlm.nih.gov/mesh/sparql?" + urllib.parse.urlencode(
+        {"query": q, "format": "JSON"}), ua)["results"]["bindings"]
+    if not b:
+        print(f"    MeSH: {uri} no té scope note")
+        return {}
+    return {"font_id": uri.rsplit("/", 1)[-1], "definicio": b[0]["note"]["value"],
             "definicio_font": f"MeSH (NLM), descriptor «{label}»"}
 
 def imatge(carta, ua):
@@ -75,7 +89,8 @@ def main():
         canvis = {}
         for pas, aplica in (("uniprot", carta["font"] == "uniprot"), ("mesh", carta["font"] == "mesh"),
                             ("imatge", carta["font"] != "uniprot")):
-            if not aplica:
+            camp = "imatge_url" if pas == "imatge" else "definicio"
+            if not aplica or carta[camp]:
                 continue
             try:
                 canvis.update({"uniprot": uniprot, "mesh": mesh, "imatge": imatge}[pas](carta, ua))

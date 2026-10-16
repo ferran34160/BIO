@@ -20,8 +20,10 @@ def main(db=ARREL / "db" / "cartes.sqlite"):
     con.executescript((ARREL / "db" / "schema.sql").read_text(encoding="utf-8"))
     with open(ARREL / "pilot" / "pilot.csv", encoding="utf-8", newline="") as f:
         for r in csv.DictReader(f):
+            if con.execute("SELECT 1 FROM carta WHERE categoria=? AND nom=?", (r["categoria"], r["nom"])).fetchone():
+                continue  # font_id pot ser NULL i UNIQUE no ho detecta
             con.execute(
-                "INSERT OR IGNORE INTO carta (categoria,nom,font,font_id,coleccions,popularitat,popularitat_tipus,estadistiques)"
+                "INSERT INTO carta (categoria,nom,font,font_id,coleccions,popularitat,popularitat_tipus,estadistiques)"
                 " VALUES (?,?,?,?,?,?,?,?)",
                 (r["categoria"], r["nom"], r["font"], r["font_id"] or None, r["coleccions"] or None,
                  float(r["popularitat"]), r["popularitat_tipus"], r["estadistiques"] or None))
