@@ -161,7 +161,25 @@ def imatge(carta, ua):
         categories += [c.get("mainsnak", {}).get("datavalue", {}).get("value")
                        for c in ent.get("claims", {}).get("P373", [])]  # categoria de Commons de l'entitat
     if carta["categoria"] == "cientific":  # per a persones, la categoria de Commons només té fotos d'ells
-        return imatge_categoria([c for c in categories if c] or [titol], carta["nom"], ua)
+        categories = [c for c in categories if c]
+        print(f"    Wikidata: categories de Commons (P373) = {categories or 'cap'}")
+        return imatge_categoria(categories + [titol], carta["nom"], ua) or imatge_cerca(carta["nom"], ua)
+    return {}
+
+def imatge_cerca(nom_persona, ua):
+    """Última opció: cerca de text a Commons; només accepta fitxers amb el cognom al nom."""
+    cognom = nom_persona.split()[-1].lower()
+    m = get_json("https://commons.wikimedia.org/w/api.php?" + urllib.parse.urlencode(
+        {"action": "query", "list": "search", "srsearch": nom_persona, "srnamespace": 6, "srlimit": 20,
+         "format": "json"}), ua)
+    fitxers = [x["title"][5:] for x in m["query"]["search"]
+               if x["title"].lower().endswith((".jpg", ".jpeg", ".png")) and cognom in x["title"].lower()]
+    print(f"    cerca a Commons «{nom_persona}»: {len(fitxers)} fotos candidates")
+    for f in fitxers[:8]:
+        r = fitxer_commons(f, ua)
+        if r:
+            print(f"    imatge trobada per cerca: {f}  (revisar que sigui la persona correcta)")
+            return r
     return {}
 
 def imatge_categoria(categories, nom_persona, ua):
@@ -173,6 +191,7 @@ def imatge_categoria(categories, nom_persona, ua):
         fitxers = [x["title"][5:] for x in m["query"]["categorymembers"]
                    if x["title"].lower().endswith((".jpg", ".jpeg", ".png"))]
         # primer els que porten el cognom al nom del fitxer (retrats), després la resta
+        print(f"    categoria «{cat}»: {len(fitxers)} fotos candidates")
         fitxers.sort(key=lambda f: cognom not in f.lower())
         for f in fitxers[:8]:
             r = fitxer_commons(f, ua)
