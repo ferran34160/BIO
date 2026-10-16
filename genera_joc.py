@@ -33,7 +33,8 @@ def construeix_dades():
     con = sqlite3.connect(ARREL / "db" / "cartes.sqlite")
     con.row_factory = sqlite3.Row
     cartes, per_nom = [], {}
-    for c in con.execute("SELECT * FROM carta ORDER BY categoria, nom"):
+    # Només entren al joc les cartes completes: sense definició (font citada) no es publiquen.
+    for c in con.execute("SELECT * FROM carta WHERE definicio IS NOT NULL ORDER BY categoria, nom"):
         raresa = c["raresa"] or "comuna"
         meta = {"id": c["id"], "nom": c["nom"], "cat": gw.ETIQ_CAT[c["categoria"]], "raresa": raresa,
                 "rlabel": gw.ETIQ_RARESA[raresa], "color": gw.COLORS[raresa],
