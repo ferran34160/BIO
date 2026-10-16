@@ -3,8 +3,8 @@ import csv, sqlite3, sys
 from pathlib import Path
 
 ARREL = Path(__file__).parent
-# (percentil mínim, raresa): el 50% més baix és comú, el 1% més alt llegendari
-LLINDARS = [(0.99, "llegendaria"), (0.95, "epica"), (0.80, "rara"), (0.50, "poc_comuna"), (0.0, "comuna")]
+# (percentil mínim, raresa): el 45% més baix és comú, el 10% més alt èpic o millor, el 1% més alt llegendari
+LLINDARS = [(0.99, "llegendaria"), (0.90, "epica"), (0.75, "rara"), (0.45, "poc_comuna"), (0.0, "comuna")]
 MIN_CARTES_LLEGENDARIA = 20  # categories amb tantes cartes o més: la més popular és llegendària (amb pocs milers de cartes el 1% ja ho fa sol)
 NOUS = ("etiqueta_font", "wiki_titol", "terme_pubmed")
 
