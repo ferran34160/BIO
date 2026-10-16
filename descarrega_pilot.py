@@ -38,7 +38,7 @@ def uniprot(carta, ua):
                    if c.get("commentType") == "FUNCTION" and c.get("texts")), None)
     estad = json.loads(carta["estadistiques"] or "{}")
     estad["longitud_aa"] = d["sequence"]["length"]
-    return {"definicio": funcio, "definicio_font": f"UniProt {carta['font_id']} (CC BY 4.0, a verificar)",
+    return {"definicio": funcio, "definicio_font": f"UniProt {carta['font_id']} (CC BY 4.0, to be verified)",
             "estadistiques": json.dumps(estad)}
 
 def mesh(carta, ua):
@@ -57,7 +57,7 @@ def mesh(carta, ua):
         print(f"    MeSH: {uri} no té scope note")
         return {}
     return {"font_id": uri.rsplit("/", 1)[-1], "definicio": b[0]["note"]["value"],
-            "definicio_font": f"MeSH (NLM), descriptor «{label}»"}
+            "definicio_font": f"MeSH (NLM), descriptor "{label}""}
 
 def imatge(carta, ua):
     titol = WIKI_TITLE.get(carta["nom"], carta["nom"])
