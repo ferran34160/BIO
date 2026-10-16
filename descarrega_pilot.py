@@ -84,7 +84,10 @@ def imatge(carta, ua):
     c = get_json("https://commons.wikimedia.org/w/api.php?" + urllib.parse.urlencode(
         {"action": "query", "prop": "imageinfo", "iiprop": "url|extmetadata", "iiurlwidth": 600,
          "titles": "File:" + pag["pageimage"], "format": "json"}), ua)
-    info = next(iter(c["query"]["pages"].values()))["imageinfo"][0]
+    pag_img = next(iter(c["query"]["pages"].values()))
+    if "imageinfo" not in pag_img:  # fitxer que no és a Commons (p. ex. imatge local de Wikipedia amb "fair use")
+        return {}
+    info = pag_img["imageinfo"][0]
     meta = info["extmetadata"]
     llic = meta.get("LicenseShortName", {}).get("value", "")
     if not LLICENCIES_LLIURES.match(llic):
