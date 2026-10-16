@@ -45,15 +45,15 @@ def carta_html(c):
                f'<span>{e(ETIQ_CAT[c["categoria"]])}</span></div>')
     stats = "".join(f'<li><span>{e(ETIQ_STAT.get(k, k))}</span><b>{e(str(v))}</b></li>'
                     for k, v in json.loads(c["estadistiques"] or "{}").items())
-    defin = (f'<p class="def">{e(c["definicio"])}</p><p class="font">Source: {e(c["definicio_font"] or "")}</p>'
-             if c["definicio"] else '<p class="def buit">Definition pending</p>')
+    defin = (f'<p class="def">{e(c["definicio"])}</p>' if c["definicio"] else '<p class="def buit">Definition pending</p>')
+    font = f'<p class="font">Source: {e(c["definicio_font"] or "")}</p>' if c["definicio"] else ""
     r = c["raresa"] or "comuna"
     estrelles = "★" * (list(COLORS).index(r) + 1)
     return (f'<article class="carta" data-r="{r}" style="--r:{color}"><i class="orn tl"></i><i class="orn tr"></i>'
             f'<i class="orn bl"></i><i class="orn br"></i><header><h2>{e(c["nom"])}</h2>'
             f'<span class="rb">{e(ETIQ_RARESA.get(r, ""))}<b>{estrelles}</b></span></header>'
             f'<div class="img">{img}</div><div class="cat">{e(ETIQ_CAT[c["categoria"]])}</div>'
-            f'{defin}<ul class="stats">{stats}</ul></article>')
+            f'{defin}<ul class="stats">{stats}</ul>{font}</article>')
 
 CSS = ("""body{margin:0;font:15px system-ui,sans-serif;background:#10141b;color:#e8ecf2}
 h1{padding:20px 16px 0;margin:0}.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:16px;padding:16px}
