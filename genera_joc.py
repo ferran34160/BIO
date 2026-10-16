@@ -34,7 +34,7 @@ def construeix_dades():
         meta = {"id": c["id"], "nom": c["nom"], "cat": gw.ETIQ_CAT[c["categoria"]], "raresa": raresa,
                 "rlabel": gw.ETIQ_RARESA[raresa], "color": gw.COLORS[raresa],
                 "sets": [x for x in (c["coleccions"] or "").split(",") if x],
-                "html": gw.carta_html(c), "icona": gw.ICONES[c["categoria"]]}
+                "pop": c["popularitat"] or 0, "html": gw.carta_html(c), "icona": gw.ICONES[c["categoria"]]}
         cartes.append(meta)
         per_nom[c["nom"]] = c["id"]
     by_id = {m["id"]: m["raresa"] for m in cartes}
@@ -56,26 +56,26 @@ def construeix_dades():
     return cartes, misions
 
 IC = {
-    "home": '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M5 9h14"/></svg>',
-    "album": '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="8" height="8" rx="1"/><rect x="13" y="3" width="8" height="8" rx="1"/><rect x="3" y="13" width="8" height="8" rx="1"/><rect x="13" y="13" width="8" height="8" rx="1"/></svg>',
-    "cols": '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3l9 5-9 5-9-5z"/><path d="M3 13l9 5 9-5"/></svg>',
-    "mis": '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3l2.6 5.6 6 .8-4.4 4.2 1.1 6L12 16.8 6.7 19.6l1.1-6L3.4 9.4l6-.8z"/></svg>',
-    "shop": '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.7 6.3a4 4 0 0 0-5 5L3 18l3 3 6.7-6.7a4 4 0 0 0 5-5l-2.5 2.5-2.2-.5-.5-2.2z"/></svg>',
-    "perfil": '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.5 3.5-7 8-7s8 2.5 8 7"/></svg>',
+    "home": '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3l9 8h-3v9h-5v-6h-2v6H6v-9H3z"/></svg>',
+    "album": '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 21s-8-5.2-8-11a4.6 4.6 0 0 1 8-3 4.6 4.6 0 0 1 8 3c0 5.800-8 11-8 11z"/></svg>',
+    "all": '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg>',
+    "mis": '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-2 15l-5-5 1.400-1.400L10 14.200l7.600-7.600L19 8z"/></svg>',
+    "shop": '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M22 19l-8.500-8.500a5 5 0 0 0-6.800-6.300l3.400 3.400-2.500 2.500-3.400-3.400A5 5 0 0 0 10.500 13.500L19 22z"/></svg>',
+    "perfil": '<svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.500 3.500-7 8-7s8 2.500 8 7z"/></svg>',
 }
 
 def main():
     cartes, misions = construeix_dades()
-    dades = json.dumps({"cartes": cartes, "misions": misions}, ensure_ascii=False).replace("</", "<\\/")
+    dades = json.dumps({"cartes": cartes, "misions": misions, "colors": gw.COLORS}, ensure_ascii=False).replace("</", "<\\/")
     css = (ARREL / "joc_src" / "joc.css").read_text(encoding="utf-8")
     js = (ARREL / "joc_src" / "joc.js").read_text(encoding="utf-8")
-    tabs = [("home", "Home"), ("album", "Album"), ("cols", "Collections"), ("mis", "Missions"), ("shop", "Workshop")]
+    tabs = [("home", "Home"), ("album", "Album"), ("all", "All"), ("mis", "Missions"), ("shop", "Workshop")]
     nav = "".join(f'<button data-v="{k}">{IC[k]}{n}</button>' for k, n in tabs)
     pagina = (f'<!doctype html><html lang="en"><meta charset="utf-8">'
               f'<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">'
-              f'<meta name="theme-color" content="#14122B"><meta name="apple-mobile-web-app-capable" content="yes">'
+              f'<meta name="theme-color" content="#0A0A0A"><meta name="apple-mobile-web-app-capable" content="yes">'
               f'<title>BIO Cards</title><style>{gw.CSS}{css}</style>'
-              f'<header class="top"><h1 id="title">BIO Cards</h1><span class="coins" id="coins"></span>'
+              f'<header class="top"><span class="pill" id="coins"></span>'
               f'<button class="iconbtn" id="bProfile" aria-label="Profile">{IC["perfil"]}</button></header>'
               f'<nav class="tabs">{nav}</nav><main id="app"></main><div id="overlayHost"></div><div id="modalHost"></div>'
               f'<script id="dades" type="application/json">{dades}</script><script>{js}</script></html>')
