@@ -30,7 +30,7 @@ h2.sec{margin:20px 0 8px;font-size:18px;font-weight:700}
 .home{display:flex;flex-direction:column;align-items:center;text-align:center;padding-top:6px}
 .home h1{margin:0;font-size:28px;font-weight:800}.home .sub{color:var(--onv);margin:2px 0 18px}
 .packwrap{position:relative;width:58%;max-width:250px;cursor:pointer;margin-bottom:12px}
-.packwrap::before{content:"";position:absolute;inset:-30%;background:radial-gradient(circle,#FFB30088 0,transparent 62%);animation:halo 1.8s ease-in-out infinite alternate;pointer-events:none}
+.packwrap::before{content:"";position:absolute;inset:-30%;background:radial-gradient(circle,#3DDC9788 0,transparent 62%);animation:halo 1.8s ease-in-out infinite alternate;pointer-events:none}
 @keyframes halo{from{opacity:.4}to{opacity:1}}
 .packwrap svg{position:relative;width:100%;display:block}.packwrap.shake{animation:shake .36s linear 1}
 @keyframes shake{0%,100%{transform:rotate(0)}17%{transform:rotate(7deg)}50%{transform:rotate(-7deg)}83%{transform:rotate(7deg)}}
